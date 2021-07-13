@@ -31,7 +31,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
         //Y座標を移動
         Transform myTransform = this.transform;
         Vector3 pos = myTransform.position;
-        pos.y -= 100f;
+        pos.y += 100f;
         myTransform.position = pos;
         // クリックされた時に行いたい処理
         Debug.Log("押されたよ");

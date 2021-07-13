@@ -13,9 +13,12 @@ public class TestScene : MonoBehaviourPunCallbacks
   
     public Text PlayerNum;
 
+    public int Number;
+
     private void Start()
     {
         PhotonNetwork.NickName = "Player";
+        Number = 0;
 
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
@@ -38,7 +41,9 @@ public class TestScene : MonoBehaviourPunCallbacks
         var local = PhotonNetwork.LocalPlayer;
 
         Debug.Log(local.ActorNumber);
-        
+        Number = local.ActorNumber; //何番目のプレイヤーかを保存
+        //Time.timeScale = 0;
+
     }
 
 

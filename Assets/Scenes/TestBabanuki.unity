@@ -1817,6 +1817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerNum: {fileID: 0}
+  Number: 0
 --- !u!1 &1429718269
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,6 +2495,7 @@ MonoBehaviour:
   Sitakutibiru: {fileID: 2049502867}
   Yajirusi: {fileID: 1217629368}
   StartButtun: {fileID: 180630898}
+  NetManager: {fileID: 1384225368}
 --- !u!4 &2115009427
 Transform:
   m_ObjectHideFlags: 0

@@ -54,50 +54,71 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     //ゲームスタートに関する表示
     public GameObject StartButtun;
+    private bool nowgame;
+
+    //ネット関連
+    public TestScene NetManager;
+    private int MyNumber; //自分が何番目のプレイヤーかどうか
 
     void Start()
     {
+        nowgame = false;
+        StartButtun.SetActive(false);
         //StartGame();
         //スタート前
+        
     }
 
     public void GameStart() //スタートボタン押下時に作動する関数
     {
         Debug.Log("ゲームを開始します");
         StartButtun.SetActive(false);
+        //Time.timeScale = 1;
+        nowgame = true;
         StartGame();
     }
 
     void Update()
     {
-        //Debug.Log("相手のターンまで"+countDown);
-        if (countDown >= 0)
-        {
-            countDown -= Time.deltaTime;
-            UIobj.fillAmount -= 1.0f / countTime*Time.deltaTime;
-        }
-        else if (countDown < 0)
-        {
-            GameObject[] Card10 = GameObject.FindGameObjectsWithTag("Card10");
-            foreach (GameObject card10 in Card10)
-                GameObject.Destroy(card10);
-            ChangeTurn();
-        }
+        if (nowgame){
+            //Debug.Log("相手のターンまで"+countDown);
+            if (countDown >= 0)
+            {
+                countDown -= Time.deltaTime;
+                UIobj.fillAmount -= 1.0f / countTime * Time.deltaTime;
+            }
+            else if (countDown < 0)
+            {
+                GameObject[] Card10 = GameObject.FindGameObjectsWithTag("Card10");
+                foreach (GameObject card10 in Card10)
+                    GameObject.Destroy(card10);
+                ChangeTurn();
+            }
 
-        //funamon
-        
-        if (isPlayerTurn) //プレイヤーがカードを引く
-        {
-            PlayerDeck.transform.position = new Vector3(350, 800, 0);
-            EnemyDeck.transform.position = new Vector3(350, 80, 0);
-        }
-        else
-        {
-            PlayerDeck.transform.position = new Vector3(350, 80, 0);
-            EnemyDeck.transform.position = new Vector3(350, 800, 0);
-        }
-        
+            //funamon
 
+            if (isPlayerTurn) //プレイヤーがカードを引く
+            {
+                PlayerDeck.transform.position = new Vector3(350, 800, 0);
+                EnemyDeck.transform.position = new Vector3(350, 80, 0);
+            }
+            else
+            {
+                PlayerDeck.transform.position = new Vector3(350, 80, 0);
+                EnemyDeck.transform.position = new Vector3(350, 800, 0);
+            }
+
+        }
+        else //ゲーム開始前
+        {
+            MyNumber = NetManager.Number;
+            
+            if(MyNumber >= 1) //入室完了したら、→以下ゲーム開始前の処理。ここでPlayer１かPlayer２かがわかります。今は同じ挙動するけど、Player１をここでいうPlayerにしてPlayer２をここでいうEnemyにしてやればうまく擬似的にできているように見えるはず
+            {
+                StartButtun.SetActive(true);
+
+            }
+        }
     }
     void StartGame()
     {
