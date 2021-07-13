@@ -52,13 +52,22 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject Yajirusi;
     Vector3 startSize;
 
-
+    //ゲームスタートに関する表示
+    public GameObject StartButtun;
 
     void Start()
     {
-        StartGame();
-        
+        //StartGame();
+        //スタート前
     }
+
+    public void GameStart() //スタートボタン押下時に作動する関数
+    {
+        Debug.Log("ゲームを開始します");
+        StartButtun.SetActive(false);
+        StartGame();
+    }
+
     void Update()
     {
         //Debug.Log("相手のターンまで"+countDown);
@@ -76,18 +85,18 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
 
         //funamon
-        /*
+        
         if (isPlayerTurn) //プレイヤーがカードを引く
         {
-            PlayerDeck.transform.position = new Vector3(450, 800, 0);
-            EnemyDeck.transform.position = new Vector3(450, 100, 0);
+            PlayerDeck.transform.position = new Vector3(350, 800, 0);
+            EnemyDeck.transform.position = new Vector3(350, 80, 0);
         }
         else
         {
-            PlayerDeck.transform.position = new Vector3(450, 100, 0);
-            EnemyDeck.transform.position = new Vector3(450, 800, 0);
+            PlayerDeck.transform.position = new Vector3(350, 80, 0);
+            EnemyDeck.transform.position = new Vector3(350, 800, 0);
         }
-        */
+        
 
     }
     void StartGame()
