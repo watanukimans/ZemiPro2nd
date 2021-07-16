@@ -1102,7 +1102,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -846, y: 95}
+  m_AnchoredPosition: {x: -819, y: 95}
   m_SizeDelta: {x: 410, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &404337795
@@ -3556,6 +3556,10 @@ MonoBehaviour:
   QUwakutibiru: {fileID: 1554839631}
   QSitakutibiru: {fileID: 737571448}
   Yajirusi: {fileID: 1217629368}
+  EyeRR: {fileID: 2095212863}
+  EyeLL: {fileID: 305851470}
+  QEyeRR: {fileID: 596499249}
+  QEyeLL: {fileID: 1388989344}
   StartButtun: {fileID: 180630898}
   NetManager: {fileID: 1384225368}
 --- !u!4 &2115009427

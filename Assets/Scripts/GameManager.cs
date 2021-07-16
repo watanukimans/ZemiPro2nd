@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -35,7 +36,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     //funamon変数
     public GameObject PlayerDeck;
     public GameObject EnemyDeck;
-
+    //目の動く幅
+    float vib = 0;
+    float qvib = 0;
+    //目の速さ
+    int vibcount=50;
+    int qvibcount = 50;
     int Emotion = 10;
     int QEmotion = 10;
     public GameObject UwamabutaR;
@@ -63,6 +69,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject QUwakutibiru;
     public GameObject QSitakutibiru;
     public GameObject Yajirusi;
+    public RectTransform EyeRR;
+    public RectTransform EyeLL;
+    public RectTransform QEyeRR;
+    public RectTransform QEyeLL;
     Vector3 startSize;
 
     //ゲームスタートに関する表示
@@ -94,6 +104,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void Update()
     {
         if (nowgame){
+            Debug.Log(vib);
+            
             //Debug.Log("相手のターンまで"+countDown);
             if (countDown >= 0)
             {
@@ -107,7 +119,29 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     GameObject.Destroy(card10);
                 ChangeTurn();
             }
-
+            //目の振動
+            if (Emotion < 10)
+            {
+                EyeRR.position += new Vector3(vib, 0, 0);
+                EyeLL.position += new Vector3(vib, 0, 0);
+                vibcount++;
+                if (vibcount == 100)
+                {
+                    vibcount = 0;
+                    vib *= -1;
+                }
+            }
+            if (QEmotion < 10)
+            {
+                QEyeRR.position += new Vector3(qvib, 0, 0);
+                QEyeLL.position += new Vector3(qvib, 0, 0);
+                qvibcount++;
+                if (qvibcount == 100)
+                {
+                    qvibcount = 0;
+                    qvib *= -1;
+                }
+            }
             //funamon
 
             if (isPlayerTurn) //プレイヤーがカードを引く
@@ -216,6 +250,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         //ChangeHand();
         Emotion = 10;
+        QEmotion = 10;
         ResetFace();
         QResetFace();
         MaxGauge();
@@ -230,6 +265,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         //ChangeHand();
         Emotion = 10;
+        QEmotion = 10;
         ResetFace();
         QResetFace();
         MaxGauge();
@@ -576,8 +612,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.z
         );
         //振動
-
-    Transform elTransform = EyeL.transform;
+        if (vib>0)
+        {
+            vib -= 0.01f;
+        }
+        else
+        {
+            vib += 0.01f;
+        }
+        Transform elTransform = EyeL.transform;
         //大きさ
         elTransform.localScale = new Vector3(
             elTransform.localScale.x * 1.1f,
@@ -598,7 +641,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.z
         );
         //振動
-
+        if (vib > 0)
+        {
+            vib += 0.01f;
+        }
+        else
+        {
+            vib -= 0.01f;
+        }
     Transform elTransform = EyeL.transform;
         //大きさ
         elTransform.localScale = new Vector3(
@@ -611,7 +661,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     void NamidaPlus()
     {
-
+        if (Emotion == 10)
+        {
+            NamidaR.SetActive(false);
+            NamidaL.SetActive(false);
+        }
+        else
+        {
+            NamidaR.SetActive(true);
+            NamidaL.SetActive(true);
+        }
         Transform nrTransform = NamidaR.transform;
         //大きさ
         nrTransform.localScale = new Vector3(
@@ -630,7 +689,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     void NamidaMinus()
     {
-
+        if (Emotion == 10)
+        {
+            NamidaR.SetActive(false);
+            NamidaL.SetActive(false);
+        }
+        else
+        {
+            NamidaR.SetActive(true);
+            NamidaL.SetActive(true);
+        }
         Transform nrTransform = NamidaR.transform;
         //大きさ
         nrTransform.localScale = new Vector3(
@@ -779,13 +847,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //大きさ
         erTransform.localScale = startSize;
         //振動
+        Vector3 posebr = erTransform.localPosition;
+        posebr.x = 8.675928e-06f;
+        erTransform.localPosition = posebr;
+        vib = 0;
+        vibcount = 50;
         //左目
         Transform elTransform = EyeL.transform;
         //大きさ
         elTransform.localScale = startSize;
         //振動
+        Vector3 posebl = elTransform.localPosition;
+        posebl.x = -14.09999f;
+        elTransform.localPosition = posebl;
         //右涙
-         Transform nrTransform = NamidaR.transform;
+        Transform nrTransform = NamidaR.transform;
         //大きさ
         nrTransform.localScale = startSize;
         //左涙
@@ -916,7 +992,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.z
         );
         //振動
-
+        if (qvib < 0)
+        {
+            qvib += 0.01f;
+        }
+        else
+        {
+            qvib -= 0.01f;
+        }
         Transform elTransform = QEyeL.transform;
         //大きさ
         elTransform.localScale = new Vector3(
@@ -936,7 +1019,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.z
         );
         //振動
-
+        if (qvib > 0)
+        {
+            qvib += 0.01f;
+        }
+        else
+        {
+            qvib -= 0.01f;
+        }
         Transform elTransform = QEyeL.transform;
         //大きさ
         elTransform.localScale = new Vector3(
@@ -948,6 +1038,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     void QNamidaPlus()
     {
+        if (QEmotion==10)
+        {
+            QNamidaR.SetActive(false);
+            QNamidaL.SetActive(false);
+        }
+        else
+        {
+            QNamidaR.SetActive(true);
+            QNamidaL.SetActive(true);
+        }
         Transform nrTransform = QNamidaR.transform;
         //大きさ
         nrTransform.localScale = new Vector3(
@@ -966,6 +1066,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     void QNamidaMinus()
     {
+        if (QEmotion == 10)
+        {
+            QNamidaR.SetActive(false);
+            QNamidaL.SetActive(false);
+        }
+        else
+        {
+            QNamidaR.SetActive(true);
+            QNamidaL.SetActive(true);
+        }
         Transform nrTransform = QNamidaR.transform;
         //大きさ
         nrTransform.localScale = new Vector3(
@@ -1107,11 +1217,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //大きさ
         erTransform.localScale = startSize;
         //振動
+        Vector3 posebr = erTransform.localPosition;
+        posebr.x = 22.13998f;
+        erTransform.localPosition = posebr;
+        qvib = 0f;
+        qvibcount = 50;
         //左目
         Transform elTransform = QEyeL.transform;
         //大きさ
         elTransform.localScale = startSize;
         //振動
+        Vector3 posebl = elTransform.localPosition;
+        posebl.x = -4.100001f;
+        elTransform.localPosition = posebl;
         //右涙
         Transform nrTransform = QNamidaR.transform;
         //大きさ
