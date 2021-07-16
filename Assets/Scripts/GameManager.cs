@@ -77,6 +77,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     //ゲームスタートに関する表示
     public GameObject StartButtun;
+    public GameObject LoadImage;
     private bool nowgame;
 
     //ネット関連
@@ -86,7 +87,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void Start()
     {
         nowgame = false;
-        StartButtun.SetActive(false);
+        StartButtun.SetActive(true);
+        LoadImage.SetActive(true);
         //StartGame();
         //スタート前
         
@@ -162,8 +164,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             
             if(MyNumber >= 1) //入室完了したら、→以下ゲーム開始前の処理。ここでPlayer１かPlayer２かがわかります。今は同じ挙動するけど、Player１をここでいうPlayerにしてPlayer２をここでいうEnemyにしてやればうまく擬似的にできているように見えるはず
             {
-                StartButtun.SetActive(true);
-
+                //StartButtun.SetActive(true);
+                LoadImage.SetActive(false);
             }
         }
     }
