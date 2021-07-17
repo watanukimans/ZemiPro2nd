@@ -75,6 +75,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public RectTransform QEyeLL;
     Vector3 startSize;
 
+    
+    public GameObject HaikeiETQ;
+    public GameObject HaikeiETM;
+    public GameObject MunkuBase;
+    public GameObject MonarizaBase;
+    
+
     //ゲームスタートに関する表示
     public GameObject StartButtun;
     public GameObject LoadImage;
@@ -490,7 +497,64 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         UIobj.fillAmount = 1;
     }
-    
+    //ターン切り替え時に絵の位置を移動
+    /*
+    void ChangePlaceToEnemyTurnA()
+    {
+        HaikeiETM.SetActive(true);
+        Transform qTransform = MunkuBase.transform;
+        qTransform.localPosition = new Vector3(266,30,0);
+        Transform mTransform = MonarizaBase.transform;
+        mTransform.localPosition = new Vector3(0,-63,0);
+        //ヒエラルキーの順序を入れ替え
+        Transform mp = GameObject.Find("MonarizaBase").transform;
+        mp.SetSiblingIndex(3);
+        Transform qp = GameObject.Find("MunkuBase").transform;
+        qp.SetSiblingIndex(0);
+
+    }
+    void ChangePlaceToPlayerTurnA()
+    {
+        HaikeiETM.SetActive(false);
+        Transform qTransform = MunkuBase.transform;
+        qTransform.localPosition = new Vector3(0,108,0);
+        Transform mTransform = MonarizaBase.transform;
+        mTransform.localPosition = new Vector3(279,-159,0);
+        //ヒエラルキーの順序を入れ替え
+        Transform mp = GameObject.Find("MonarizaBase").transform;
+        mp.SetSiblingIndex(1);
+        Transform qp = GameObject.Find("MunkuBase").transform;
+        qp.SetSiblingIndex(0);
+    }
+    void ChangePlaceToEnemyTurnB()
+    {
+        HaikeiETQ.SetActive(true);
+        Transform qTransform = MunkuBase.transform;
+        qTransform.localPosition = new Vector3(266,30,0);
+        Transform mTransform = MonarizaBase.transform;
+        mTransform.localPosition = new Vector3(0,-63,0);
+        //ヒエラルキーの順序を入れ替え
+        Transform mp = GameObject.Find("MonarizaBase").transform;
+        mp.SetSiblingIndex(3);
+        Transform qp = GameObject.Find("MunkuBase").transform;
+        qp.SetSiblingIndex(0);
+
+    }
+    void ChangePlaceToPlayerTurnB()
+    {
+        HaikeiETQ.SetActive(false);
+        Transform qTransform = MunkuBase.transform;
+        qTransform.localPosition = new Vector3(0,108,0);
+        Transform mTransform = MonarizaBase.transform;
+        mTransform.localPosition = new Vector3(279,-159,0);
+        //ヒエラルキーの順序を入れ替え
+        Transform mp = GameObject.Find("MonarizaBase").transform;
+        mp.SetSiblingIndex(1);
+        Transform qp = GameObject.Find("MunkuBase").transform;
+        qp.SetSiblingIndex(0);
+    }
+    */
+
     //顔関連
     void UwamabutaMinus()
     {
