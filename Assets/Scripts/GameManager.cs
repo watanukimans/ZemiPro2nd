@@ -113,7 +113,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void Update()
     {
         if (nowgame){
-            Debug.Log(vib);
+            //Debug.Log(vib);
             
             //Debug.Log("相手のターンまで"+countDown);
             if (countDown >= 0)
@@ -155,13 +155,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
             if (isPlayerTurn) //プレイヤーがカードを引く
             {
-                PlayerDeck.transform.position = new Vector3(350, 800, 0);
-                EnemyDeck.transform.position = new Vector3(250, 80, 0);
+                PlayerDeck.transform.position = new Vector3(350, 1600, 0);
+                EnemyDeck.transform.position = new Vector3(750,250, 0);
             }
             else
             {
-                PlayerDeck.transform.position = new Vector3(250, 80, 0);
-                EnemyDeck.transform.position = new Vector3(350, 800, 0);
+                PlayerDeck.transform.position = new Vector3(750,250, 0);
+                EnemyDeck.transform.position = new Vector3(350, 1600, 0);
             }
 
         }
