@@ -40,8 +40,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     float vib = 0;
     float qvib = 0;
     //目の速さ
-    int vibcount=50;
-    int qvibcount = 50;
+    int vibcount=25;
+    int qvibcount = 25;
     int Emotion = 10;
     int QEmotion = 10;
     public GameObject UwamabutaR;
@@ -127,7 +127,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 EyeRR.position += new Vector3(vib, 0, 0);
                 EyeLL.position += new Vector3(vib, 0, 0);
                 vibcount++;
-                if (vibcount == 100)
+                if (vibcount == 50)
                 {
                     vibcount = 0;
                     vib *= -1;
@@ -138,7 +138,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 QEyeRR.position += new Vector3(qvib, 0, 0);
                 QEyeLL.position += new Vector3(qvib, 0, 0);
                 qvibcount++;
-                if (qvibcount == 100)
+                if (qvibcount == 50)
                 {
                     qvibcount = 0;
                     qvib *= -1;
@@ -853,7 +853,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         posebr.x = 8.675928e-06f;
         erTransform.localPosition = posebr;
         vib = 0;
-        vibcount = 50;
+        vibcount = 25;
         //左目
         Transform elTransform = EyeL.transform;
         //大きさ
@@ -1223,7 +1223,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         posebr.x = 22.13998f;
         erTransform.localPosition = posebr;
         qvib = 0f;
-        qvibcount = 50;
+        qvibcount = 25;
         //左目
         Transform elTransform = QEyeL.transform;
         //大きさ
