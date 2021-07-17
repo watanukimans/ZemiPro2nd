@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -35,8 +36,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     //funamon変数
     public GameObject PlayerDeck;
     public GameObject EnemyDeck;
-
+    //目の動く幅
+    float vib = 0;
+    float qvib = 0;
+    //目の速さ
+    int vibcount=50;
+    int qvibcount = 50;
     int Emotion = 10;
+    int QEmotion = 10;
     public GameObject UwamabutaR;
     public GameObject UwamabutaL;
     public GameObject SitamabutaR;
@@ -49,11 +56,28 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject MayuL;
     public GameObject Uwakutibiru;
     public GameObject Sitakutibiru;
+    public GameObject QUwaMR;
+    public GameObject QUwaML;
+    public GameObject QSitaMR;
+    public GameObject QSitaML;
+    public GameObject QEyeR;
+    public GameObject QEyeL;
+    public GameObject QMayuR;
+    public GameObject QMayuL;
+    public GameObject QNamidaR;
+    public GameObject QNamidaL;
+    public GameObject QUwakutibiru;
+    public GameObject QSitakutibiru;
     public GameObject Yajirusi;
+    public RectTransform EyeRR;
+    public RectTransform EyeLL;
+    public RectTransform QEyeRR;
+    public RectTransform QEyeLL;
     Vector3 startSize;
 
     //ゲームスタートに関する表示
     public GameObject StartButtun;
+    public GameObject LoadImage;
     private bool nowgame;
 
     //ネット関連
@@ -63,7 +87,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void Start()
     {
         nowgame = false;
-        StartButtun.SetActive(false);
+        StartButtun.SetActive(true);
+        LoadImage.SetActive(true);
         //StartGame();
         //スタート前
         
@@ -81,6 +106,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void Update()
     {
         if (nowgame){
+            Debug.Log(vib);
+            
             //Debug.Log("相手のターンまで"+countDown);
             if (countDown >= 0)
             {
@@ -94,17 +121,39 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     GameObject.Destroy(card10);
                 ChangeTurn();
             }
-
+            //目の振動
+            if (Emotion < 10)
+            {
+                EyeRR.position += new Vector3(vib, 0, 0);
+                EyeLL.position += new Vector3(vib, 0, 0);
+                vibcount++;
+                if (vibcount == 100)
+                {
+                    vibcount = 0;
+                    vib *= -1;
+                }
+            }
+            if (QEmotion < 10)
+            {
+                QEyeRR.position += new Vector3(qvib, 0, 0);
+                QEyeLL.position += new Vector3(qvib, 0, 0);
+                qvibcount++;
+                if (qvibcount == 100)
+                {
+                    qvibcount = 0;
+                    qvib *= -1;
+                }
+            }
             //funamon
 
             if (isPlayerTurn) //プレイヤーがカードを引く
             {
                 PlayerDeck.transform.position = new Vector3(350, 800, 0);
-                EnemyDeck.transform.position = new Vector3(350, 80, 0);
+                EnemyDeck.transform.position = new Vector3(250, 80, 0);
             }
             else
             {
-                PlayerDeck.transform.position = new Vector3(350, 80, 0);
+                PlayerDeck.transform.position = new Vector3(250, 80, 0);
                 EnemyDeck.transform.position = new Vector3(350, 800, 0);
             }
 
@@ -115,8 +164,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             
             if(MyNumber >= 1) //入室完了したら、→以下ゲーム開始前の処理。ここでPlayer１かPlayer２かがわかります。今は同じ挙動するけど、Player１をここでいうPlayerにしてPlayer２をここでいうEnemyにしてやればうまく擬似的にできているように見えるはず
             {
-                StartButtun.SetActive(true);
-
+                //StartButtun.SetActive(true);
+                LoadImage.SetActive(false);
             }
         }
     }
@@ -168,47 +217,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         deck2.RemoveAt(0);
         CreateCard2(cardID, hand);
     }
-    /*
-    void DrowCard2(Transform hand) // カードを引く
-    {
-        // デッキがないなら引かない
-        if (deck2.Count == 0)
-        {
-            return;
-        }
-
-        // デッキの一番上のカードを抜き取り、手札に加える
-        int cardID = deck2[0];
-        deck2.RemoveAt(0);
-        CreateCard(cardID, hand);
-    }
-    void DrowCard3(Transform hand) // カードを引く
-    {
-        // デッキがないなら引かない
-        if (deck.Count == 0)
-        {
-            return;
-        }
-
-        // デッキの一番上のカードを抜き取り、手札に加える
-        int cardID = deck[0];
-        deck.RemoveAt(0);
-        CreateCard2(cardID, hand);
-    }
-    void DrowCard4(Transform hand) // カードを引く
-    {
-        // デッキがないなら引かない
-        if (deck2.Count == 0)
-        {
-            return;
-        }
-
-        // デッキの一番上のカードを抜き取り、手札に加える
-        int cardID = deck2[0];
-        deck2.RemoveAt(0);
-        CreateCard2(cardID, hand);
-    }
-    */
+    
     void SetStartHand() // 手札を配る
     {
         //Shuffle();
@@ -216,29 +225,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         switch (decknum)
         {
             case 1: //自分ジョーカー
-                /*
-                for (int i = 0; i < 11; i++)
-                {
-                    DrowCard(playerHand);
-                }
-                for (int i = 0; i < 11; i++)
-                {
-                    DrowCard4(EnemyHand);
-                }
-                */
                 ChangeTurn();
                 break;
             case 2: //相手ジョーカー
-                /*
-                for (int i = 0; i < 11; i++)
-                {
-                    DrowCard2(playerHand);
-                }
-                for (int i = 0; i < 11; i++)
-                {
-                    DrowCard3(EnemyHand);
-                }
-                */
                 PlayerTurn();
                 break;
         }
@@ -263,12 +252,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         //ChangeHand();
         Emotion = 10;
+        QEmotion = 10;
         ResetFace();
+        QResetFace();
         MaxGauge();
         SetHand();
         turn++;
         Debug.Log(turn);
-        //CreateCard2(10, EnemyHand);
         countDown = 5.0f;
         Debug.Log("Playerのターン");
     }
@@ -277,12 +267,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         //ChangeHand();
         Emotion = 10;
+        QEmotion = 10;
         ResetFace();
+        QResetFace();
         MaxGauge();
         SetHand();
         turn++;
         Debug.Log(turn);
-        //CreateCard(10, playerHand);
         countDown = 5.0f;
         Debug.Log("Enemyのターン");
     }
@@ -623,8 +614,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.z
         );
         //振動
-
-    Transform elTransform = EyeL.transform;
+        if (vib>0)
+        {
+            vib -= 0.01f;
+        }
+        else
+        {
+            vib += 0.01f;
+        }
+        Transform elTransform = EyeL.transform;
         //大きさ
         elTransform.localScale = new Vector3(
             elTransform.localScale.x * 1.1f,
@@ -645,7 +643,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.z
         );
         //振動
-
+        if (vib > 0)
+        {
+            vib += 0.01f;
+        }
+        else
+        {
+            vib -= 0.01f;
+        }
     Transform elTransform = EyeL.transform;
         //大きさ
         elTransform.localScale = new Vector3(
@@ -658,7 +663,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     void NamidaPlus()
     {
-
+        if (Emotion == 10)
+        {
+            NamidaR.SetActive(false);
+            NamidaL.SetActive(false);
+        }
+        else
+        {
+            NamidaR.SetActive(true);
+            NamidaL.SetActive(true);
+        }
         Transform nrTransform = NamidaR.transform;
         //大きさ
         nrTransform.localScale = new Vector3(
@@ -677,7 +691,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     void NamidaMinus()
     {
-
+        if (Emotion == 10)
+        {
+            NamidaR.SetActive(false);
+            NamidaL.SetActive(false);
+        }
+        else
+        {
+            NamidaR.SetActive(true);
+            NamidaL.SetActive(true);
+        }
         Transform nrTransform = NamidaR.transform;
         //大きさ
         nrTransform.localScale = new Vector3(
@@ -826,13 +849,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //大きさ
         erTransform.localScale = startSize;
         //振動
+        Vector3 posebr = erTransform.localPosition;
+        posebr.x = 8.675928e-06f;
+        erTransform.localPosition = posebr;
+        vib = 0;
+        vibcount = 50;
         //左目
         Transform elTransform = EyeL.transform;
         //大きさ
         elTransform.localScale = startSize;
         //振動
+        Vector3 posebl = elTransform.localPosition;
+        posebl.x = -14.09999f;
+        elTransform.localPosition = posebl;
         //右涙
-         Transform nrTransform = NamidaR.transform;
+        Transform nrTransform = NamidaR.transform;
         //大きさ
         nrTransform.localScale = startSize;
         //左涙
@@ -848,4 +879,366 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         playerHand.transform.position = EHpos;
     }
     */
+    //ここからムンク
+    void QUwaMMinus()
+    {
+        //右上瞼
+        Transform umrTransform = QUwaMR.transform;
+        //位置
+        Vector3 posr = umrTransform.localPosition;
+        posr.y += 0.1f;
+        umrTransform.localPosition = posr;
+        //しなり
+        //角度
+        Vector3 localAngleR = umrTransform.localEulerAngles;
+        localAngleR.z -= 5f;
+        umrTransform.localEulerAngles = localAngleR;
+
+        //左上瞼
+        Transform umlTransform = QUwaML.transform;
+        //位置
+        Vector3 posl = umlTransform.localPosition;
+        posl.y += 0.1f;
+        umlTransform.localPosition = posl;
+        //しなり
+        //角度
+        Vector3 localAngleL = umlTransform.localEulerAngles;
+        localAngleL.z += 5f;
+        umlTransform.localEulerAngles = localAngleL;
+    }
+    void QUwaMPlus()
+    {
+        //右上瞼
+        //位置
+        Transform umrTransform = QUwaMR.transform;
+        Vector3 posr = umrTransform.localPosition;
+        posr.y -= 0.1f;
+        umrTransform.localPosition = posr;
+        //しなり
+        //角度
+        Vector3 localAngleR = umrTransform.localEulerAngles;
+        localAngleR.z += 5f;
+        umrTransform.localEulerAngles = localAngleR;
+        //左上瞼
+        //位置
+        Transform umlTransform = QUwaML.transform;
+        Vector3 posl = umlTransform.localPosition;
+        posl.y -= 0.1f;
+        umlTransform.localPosition = posl;
+        //しなり
+        //角度
+        Vector3 localAngleL = umlTransform.localEulerAngles;
+        localAngleL.z -= 5f;
+        umlTransform.localEulerAngles = localAngleL;
+    }
+    void QSitaMMinus()
+    {
+        //右下瞼
+        //位置
+        Transform smrTransform = QSitaMR.transform;
+        Vector3 posr = smrTransform.localPosition;
+        posr.y += 0.1f;
+        smrTransform.localPosition = posr;
+        //しなり
+        //角度
+        Vector3 localAngleR = smrTransform.localEulerAngles;
+        localAngleR.z -= 5f;
+        smrTransform.localEulerAngles = localAngleR;
+
+        //左下瞼
+        //位置
+        Transform smlTransform = QSitaML.transform;
+        Vector3 posl = smlTransform.localPosition;
+        posl.y += 0.1f;
+        smlTransform.localPosition = posl;
+        //しなり
+        //角度
+        Vector3 localAngleL = smlTransform.localEulerAngles;
+        localAngleL.z += 5f;
+        smlTransform.localEulerAngles = localAngleL;
+    }
+    void QSitaMPlus()
+    {
+        //右下瞼
+        //位置
+        Transform smrTransform = QSitaMR.transform;
+        Vector3 posr = smrTransform.localPosition;
+        posr.y -= 0.1f;
+        smrTransform.localPosition = posr;
+        //しなり
+        //角度
+        Vector3 localAngleR = smrTransform.localEulerAngles;
+        localAngleR.z += 5f;
+        smrTransform.localEulerAngles = localAngleR;
+
+        //左下瞼
+        //位置
+        Transform smlTransform = QSitaML.transform;
+        Vector3 posl = smlTransform.localPosition;
+        posl.y -= 0.1f;
+        smlTransform.localPosition = posl;
+        //しなり
+        //角度
+        Vector3 localAngleL = smlTransform.localEulerAngles;
+        localAngleL.z -= 5f;
+        smlTransform.localEulerAngles = localAngleL;
+    }
+
+    void QEyePlus()
+    {
+        Transform erTransform = QEyeR.transform;
+        //大きさ
+        erTransform.localScale = new Vector3(
+            erTransform.localScale.x * 1.1f,
+            erTransform.localScale.y * 1.1f,
+            erTransform.localScale.z
+        );
+        //振動
+        if (qvib < 0)
+        {
+            qvib += 0.01f;
+        }
+        else
+        {
+            qvib -= 0.01f;
+        }
+        Transform elTransform = QEyeL.transform;
+        //大きさ
+        elTransform.localScale = new Vector3(
+            elTransform.localScale.x * 1.1f,
+            elTransform.localScale.y * 1.1f,
+            elTransform.localScale.z
+        );
+        //振動
+    }
+    void QEyeMinus()
+    {
+        Transform erTransform = QEyeR.transform;
+        //大きさ
+        erTransform.localScale = new Vector3(
+            erTransform.localScale.x / 1.1f,
+            erTransform.localScale.y / 1.1f,
+            erTransform.localScale.z
+        );
+        //振動
+        if (qvib > 0)
+        {
+            qvib += 0.01f;
+        }
+        else
+        {
+            qvib -= 0.01f;
+        }
+        Transform elTransform = QEyeL.transform;
+        //大きさ
+        elTransform.localScale = new Vector3(
+            elTransform.localScale.x / 1.1f,
+            elTransform.localScale.y / 1.1f,
+            elTransform.localScale.z
+        );
+        //振動
+    }
+    void QNamidaPlus()
+    {
+        if (QEmotion==10)
+        {
+            QNamidaR.SetActive(false);
+            QNamidaL.SetActive(false);
+        }
+        else
+        {
+            QNamidaR.SetActive(true);
+            QNamidaL.SetActive(true);
+        }
+        Transform nrTransform = QNamidaR.transform;
+        //大きさ
+        nrTransform.localScale = new Vector3(
+            nrTransform.localScale.x / 1.1f,
+            nrTransform.localScale.y / 1.1f,
+            nrTransform.localScale.z
+       );
+
+        Transform nlTransform = QNamidaL.transform;
+        //大きさ
+        nlTransform.localScale = new Vector3(
+            nlTransform.localScale.x / 1.1f,
+            nlTransform.localScale.y / 1.1f,
+            nlTransform.localScale.z
+       );
+    }
+    void QNamidaMinus()
+    {
+        if (QEmotion == 10)
+        {
+            QNamidaR.SetActive(false);
+            QNamidaL.SetActive(false);
+        }
+        else
+        {
+            QNamidaR.SetActive(true);
+            QNamidaL.SetActive(true);
+        }
+        Transform nrTransform = QNamidaR.transform;
+        //大きさ
+        nrTransform.localScale = new Vector3(
+            nrTransform.localScale.x * 1.1f,
+            nrTransform.localScale.y * 1.1f,
+            nrTransform.localScale.z
+       );
+
+        Transform nlTransform = QNamidaL.transform;
+        //大きさ
+        nlTransform.localScale = new Vector3(
+            nlTransform.localScale.x * 1.1f,
+            nlTransform.localScale.y * 1.1f,
+            nlTransform.localScale.z
+       );
+    }
+    void QMayuPlus()
+    {
+        //右眉
+        Transform mrTransform = QMayuR.transform;
+        //角度
+        Vector3 localAngleR = mrTransform.localEulerAngles;
+        localAngleR.z += 5f;
+        mrTransform.localEulerAngles = localAngleR;
+        //しなり
+
+        //左眉
+        Transform mlTransform = QMayuL.transform;
+        //角度
+        Vector3 localAngleL = mlTransform.localEulerAngles;
+        localAngleL.z -= 5f;
+        mlTransform.localEulerAngles = localAngleL;
+        //しなり
+    }
+    void QMayuMinus()
+    {
+        //右眉
+        Transform mrTransform = QMayuR.transform;
+        //角度
+        Vector3 localAngleR = mrTransform.localEulerAngles;
+        localAngleR.z -= 5f;
+        mrTransform.localEulerAngles = localAngleR;
+        //しなり
+
+        //左眉
+        Transform mlTransform = QMayuL.transform;
+        //角度
+        Vector3 localAngleL = mlTransform.localEulerAngles;
+        localAngleL.z += 5f;
+        mlTransform.localEulerAngles = localAngleL;
+        //しなり
+    }
+    public void QEmotionPlus()
+    {
+        if (QEmotion < 20 && QEmotion > 0)
+        {
+            QEmotion++;
+
+            QUwaMPlus();
+            QSitaMPlus();
+            QEyePlus();
+            QNamidaPlus();
+
+        }
+        else
+        {
+            return;
+        }
+    }
+    public void QEmotionMinus()
+    {
+        if (QEmotion < 20 && QEmotion > 0)
+        {
+
+            QEmotion--;
+            QUwaMMinus();
+            QSitaMMinus();
+            QEyeMinus();
+            QNamidaMinus();
+        }
+        else
+        {
+            return;
+        }
+    }
+    void QResetFace()
+    {
+        startSize = new Vector3(1f, 1f, 1f);
+        //右上瞼
+        Transform umrTransform = QUwaMR.transform;
+        //位置
+        Vector3 posr = umrTransform.localPosition;
+        posr.y = 56.7f;
+        umrTransform.localPosition = posr;
+        //しなり
+        //角度
+        Vector3 localAngleR = umrTransform.localEulerAngles;
+        localAngleR.z = 0f;
+        umrTransform.localEulerAngles = localAngleR;
+
+        //左上瞼
+        Transform umlTransform = QUwaML.transform;
+        //位置
+        Vector3 posl = umlTransform.localPosition;
+        posl.y = 56.7f;
+        umlTransform.localPosition = posl;
+        //しなり
+        //角度
+        Vector3 localAngleL = umlTransform.localEulerAngles;
+        localAngleL.z = 0f;
+        umlTransform.localEulerAngles = localAngleL;
+
+        //右下瞼
+        //位置
+        Transform smrTransform = QSitaMR.transform;
+        Vector3 possmr = smrTransform.localPosition;
+        possmr.y = 56.7f;
+        smrTransform.localPosition = possmr;
+        //しなり
+        //角度
+        Vector3 localAnglesmR = smrTransform.localEulerAngles;
+        localAnglesmR.z = 0f;
+        smrTransform.localEulerAngles = localAnglesmR;
+
+        //左下瞼
+        //位置
+        Transform smlTransform = QSitaML.transform;
+        Vector3 possml = smlTransform.localPosition;
+        possml.y = 56.7f;
+        smlTransform.localPosition = possml;
+        //しなり
+        //角度
+        Vector3 localAnglesmL = smlTransform.localEulerAngles;
+        localAnglesmL.z = 0f;
+        smlTransform.localEulerAngles = localAnglesmL;
+
+        //右目
+        Transform erTransform = QEyeR.transform;
+        //大きさ
+        erTransform.localScale = startSize;
+        //振動
+        Vector3 posebr = erTransform.localPosition;
+        posebr.x = 22.13998f;
+        erTransform.localPosition = posebr;
+        qvib = 0f;
+        qvibcount = 50;
+        //左目
+        Transform elTransform = QEyeL.transform;
+        //大きさ
+        elTransform.localScale = startSize;
+        //振動
+        Vector3 posebl = elTransform.localPosition;
+        posebl.x = -4.100001f;
+        elTransform.localPosition = posebl;
+        //右涙
+        Transform nrTransform = QNamidaR.transform;
+        //大きさ
+        nrTransform.localScale = startSize;
+        //左涙
+        Transform nlTransform = QNamidaL.transform;
+        //大きさ
+        nlTransform.localScale = startSize;
+    }
 }
