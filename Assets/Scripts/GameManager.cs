@@ -508,9 +508,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         mTransform.localPosition = new Vector3(0,-63,0);
         //ヒエラルキーの順序を入れ替え
         Transform mp = GameObject.Find("MonarizaBase").transform;
-        mp.SetSiblingIndex(3);
+        mp.SetSiblingIndex(0);
         Transform qp = GameObject.Find("MunkuBase").transform;
-        qp.SetSiblingIndex(0);
+        qp.SetSiblingIndex(1);
 
     }
     void ChangePlaceToPlayerTurnA()
@@ -522,7 +522,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         mTransform.localPosition = new Vector3(279,-159,0);
         //ヒエラルキーの順序を入れ替え
         Transform mp = GameObject.Find("MonarizaBase").transform;
-        mp.SetSiblingIndex(1);
+        mp.SetSiblingIndex(4);
         Transform qp = GameObject.Find("MunkuBase").transform;
         qp.SetSiblingIndex(0);
     }
@@ -535,9 +535,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         mTransform.localPosition = new Vector3(0,-63,0);
         //ヒエラルキーの順序を入れ替え
         Transform mp = GameObject.Find("MonarizaBase").transform;
-        mp.SetSiblingIndex(3);
+        mp.SetSiblingIndex(0);
         Transform qp = GameObject.Find("MunkuBase").transform;
-        qp.SetSiblingIndex(0);
+        qp.SetSiblingIndex(1);
 
     }
     void ChangePlaceToPlayerTurnB()
@@ -549,7 +549,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         mTransform.localPosition = new Vector3(279,-159,0);
         //ヒエラルキーの順序を入れ替え
         Transform mp = GameObject.Find("MonarizaBase").transform;
-        mp.SetSiblingIndex(1);
+        mp.SetSiblingIndex(4);
         Transform qp = GameObject.Find("MunkuBase").transform;
         qp.SetSiblingIndex(0);
     }
