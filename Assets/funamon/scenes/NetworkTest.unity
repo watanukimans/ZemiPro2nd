@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerNum: {fileID: 471746538}
+  Number: 0
 --- !u!1 &1078134195
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,11 +549,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 620652958809702110, guid: 7b79d006260b04d458deecdf38bc40e8,
-        type: 3}
-      propertyPath: sceneViewId
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5542722409871154167, guid: 7b79d006260b04d458deecdf38bc40e8,
         type: 3}

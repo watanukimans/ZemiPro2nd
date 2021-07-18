@@ -702,9 +702,10 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 2
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 2119870188}
   - {fileID: 1844483614157243986}
   sceneViewId: 0
   InstantiationId: 0
@@ -721,7 +722,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f72172c25aec4b5ba1a0007b50c4abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectText: {fileID: 1094395212}
+  GetNum: 0
+  JokerNum: 0
+  select: 
 --- !u!114 &1844483614157243986
 MonoBehaviour:
   m_ObjectHideFlags: 0

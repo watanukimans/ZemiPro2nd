@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TestBabanuki.unity
+    guid: 65b749299420d194a97517d4da75c81c
   m_configObjects: {}

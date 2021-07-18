@@ -11,7 +11,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] CardController cardPrefab;
     [SerializeField] Transform playerHand,EnemyHand;
 
-    bool isPlayerTurn = true; 
+    public bool isPlayerTurn = true; 
     List<int> deck = new List<int>() {};
     List<int> deck2 = new List<int>() {};
     public CardEntity cardEntity;
@@ -87,9 +87,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject LoadImage;
     private bool nowgame;
 
+
     //ネット関連
     public TestScene NetManager;
-    private int MyNumber; //自分が何番目のプレイヤーかどうか
+    public int MyNumber; //自分が何番目のプレイヤーかどうか
+    public GameObject MyAvator;
+    public Text console;
+    public int jokernum;
+    public bool clicked; //クリックされたかどうかを判断
+    public string selectedcard; //クリックされたカード
 
     void Start()
     {
@@ -98,36 +104,59 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         LoadImage.SetActive(true);
         //StartGame();
         //スタート前
-        
+        jokernum = 100;
+        clicked = false;
+        selectedcard = null;
     }
 
     public void GameStart() //スタートボタン押下時に作動する関数
     {
-        Debug.Log("ゲームを開始します");
-        StartButtun.SetActive(false);
-        //Time.timeScale = 1;
-        nowgame = true;
-        StartGame();
+        if (MyNumber == 1)
+        {
+            Debug.Log("ゲームを開始します");
+            StartButtun.SetActive(false);
+        
+            nowgame = true;
+            StartGame();
+        }
     }
 
     void Update()
     {
+        //Debug.Log()
         if (nowgame){
             //Debug.Log(vib);
-            
+
             //Debug.Log("相手のターンまで"+countDown);
-            if (countDown >= 0)
+            
+                if (countDown >= 0)
+                {
+                    countDown -= Time.deltaTime;
+                    UIobj.fillAmount -= 1.0f / countTime * Time.deltaTime;
+                }
+                else if (countDown < 0)
+                {
+                    clicked = false;
+                    GameObject[] Card10 = GameObject.FindGameObjectsWithTag("Card10");
+                    foreach (GameObject card10 in Card10)
+                        GameObject.Destroy(card10);
+                    ChangeTurn();
+                }
+
+            if (selectedcard != null) //カード選ばれた時
             {
-                countDown -= Time.deltaTime;
-                UIobj.fillAmount -= 1.0f / countTime * Time.deltaTime;
+                Debug.Log("うんこ");
+                if (isPlayerTurn) //攻撃側
+                {
+                    MyAvator.GetComponent<AvatarController>().IsGetCard(selectedcard);
+                    //selectedcard = null;
+                }
+                else //守備側
+                {
+
+                }
             }
-            else if (countDown < 0)
-            {
-                GameObject[] Card10 = GameObject.FindGameObjectsWithTag("Card10");
-                foreach (GameObject card10 in Card10)
-                    GameObject.Destroy(card10);
-                ChangeTurn();
-            }
+            
             //目の振動
             if (Emotion < 10)
             {
@@ -164,6 +193,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 EnemyDeck.transform.position = new Vector3(350, 1600, 0);
             }
 
+            
+
         }
         else //ゲーム開始前
         {
@@ -173,9 +204,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             {
                 //StartButtun.SetActive(true);
                 LoadImage.SetActive(false);
+                //アバターを処理
+                MyAvator = TestScene.My;
+
                 if(MyNumber == 1) //Player１だったら
                 {
                     ChangePlaceToPlayerTurnA();
+                }
+                else if(MyNumber == 2) //Player2だったら
+                {
+                    ChangePlaceToPlayerTurnB();
+                    if (jokernum != 100) //どっちがジョーカーかわかる→スタート
+                    {
+                        Debug.Log("えはいzまっちゃいました？");
+                        StartGame();
+                    }
                 }
             }
         }
@@ -183,11 +226,70 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void StartGame()
     {
         // 初期手札を配る
-        SetStartHand();
+        if (MyNumber == 1) //プレイヤー１での処理を基準にジョーカーの場所を決める
+        {
+            Shuffle();
+            decknum = Random.Range(1, 3);
+            switch (decknum)
+            {
+                case 1: //自分ジョーカー
+                    MyAvator.GetComponent<AvatarController>().IsGetJoker(2); //自分がジョーカーであることをAvatarに送信
+                    ChangeTurn();
+                    break;
+                case 2: //相手ジョーカー
+                    MyAvator.GetComponent<AvatarController>().IsGetJoker(1); //相手がジョーカーであることをAvatarに送信
+                    PlayerTurn();
+                    break;
+            }
+            //SetStartHand();
 
+        }
+        else if(MyNumber == 2)
+        {
+            Debug.Log("わたしは２");
+            Debug.Log("ゲームを開始します");
+            Shuffle();
+            StartButtun.SetActive(false);
+         
+            nowgame = true;
+            //console.text = MyAvator.GetComponent<AvatarController>().JokerNum.ToString();
+
+            switch (jokernum)
+            {
+                case 1: //自分ジョーカー
+                    //Debug.Log("ふ");
+                    //MyAvator.GetComponent<AvatarController>().IsGetJoker(1); //自分がジョーカーであることをAvatarに送信
+                    ChangeTurn();
+                    break;
+                case 2: //相手ジョーカー
+                    //Debug.Log("ふふふ");
+                    //MyAvator.GetComponent<AvatarController>().IsGetJoker(0); //相手がジョーカーであることをAvatarに送信
+                    PlayerTurn();
+                    break;
+            }
+        }
         // ターンの決定
         //TurnCalc();
     }
+
+    /*
+    void SetStartHand() // 手札を配る
+    {
+        //Shuffle();
+        //decknum = Random.Range(1, 3);
+        switch (decknum)
+        {
+            case 1: //自分ジョーカー
+                MyAvator.GetComponent<AvatarController>().IsGetJoker(1); //自分がジョーカーであることをAvatarに送信
+                ChangeTurn();
+                break;
+            case 2: //相手ジョーカー
+                MyAvator.GetComponent<AvatarController>().IsGetJoker(0); //相手がジョーカーであることをAvatarに送信
+                PlayerTurn();
+                break;
+        }
+    }
+    */
 
     public void CreateCard(int cardID, Transform place)
     {
@@ -229,20 +331,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         CreateCard2(cardID, hand);
     }
     
-    void SetStartHand() // 手札を配る
-    {
-        //Shuffle();
-        decknum = Random.Range(1, 3);
-        switch (decknum)
-        {
-            case 1: //自分ジョーカー
-                ChangeTurn();
-                break;
-            case 2: //相手ジョーカー
-                PlayerTurn();
-                break;
-        }
-    }
+    
     void TurnCalc() // ターンを管理する
     {
         if (isPlayerTurn)
@@ -299,6 +388,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             deck[k] = deck[n];
             deck[n] = temp;
         }
+
+        //確認
+        //for (int i = 0; i < 11; i++)
+        //{
+        //    Debug.Log(deck[i]);
+        //}
+
         int m = deck2.Count;
         while (m > 1)
         {
@@ -503,55 +599,55 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     //ターン切り替え時に絵の位置を移動
     
-    void ChangePlaceToEnemyTurnA()
-    {
-        HaikeiETM.SetActive(true);
-        RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
-        qTransform.anchoredPosition = new Vector3(266,30,0);
-        RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
-        mTransform.anchoredPosition = new Vector3(0,-63,0);
-        
-        //ヒエラルキーの順序を入れ替え
-        Transform mp = GameObject.Find("MonarizaBase").transform;
-        mp.SetSiblingIndex(0);
-        Transform qp = GameObject.Find("MunkuBase").transform;
-        qp.SetSiblingIndex(1);
-
-    }
-    void ChangePlaceToPlayerTurnA()
-    {
-        HaikeiETM.SetActive(false);
-        RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
-        qTransform.anchoredPosition = new Vector3(0,30,0);
-        RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
-        mTransform.anchoredPosition = new Vector3(279,-159,0);
-        //ヒエラルキーの順序を入れ替え
-        Transform mp = GameObject.Find("MonarizaBase").transform;
-        mp.SetSiblingIndex(4);
-        Transform qp = GameObject.Find("MunkuBase").transform;
-        qp.SetSiblingIndex(0);
-    }
-    void ChangePlaceToEnemyTurnB()
+    void ChangePlaceToEnemyTurnA() //自身がプレイヤー１モナリザ、そして守備
     {
         HaikeiETQ.SetActive(true);
         RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
-        qTransform.anchoredPosition = new Vector3(266,30,0);
+        qTransform.anchoredPosition = new Vector3(0, -63, 0); 
         RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
-        mTransform.anchoredPosition = new Vector3(0,-63,0);
+        mTransform.anchoredPosition = new Vector3(276, -162, 0);
+        
         //ヒエラルキーの順序を入れ替え
         Transform mp = GameObject.Find("MonarizaBase").transform;
-        mp.SetSiblingIndex(0);
+        mp.SetSiblingIndex(2);
         Transform qp = GameObject.Find("MunkuBase").transform;
         qp.SetSiblingIndex(1);
 
     }
-    void ChangePlaceToPlayerTurnB()
+    void ChangePlaceToPlayerTurnA() //自身がプレイヤー１モナリザ、そして攻撃
     {
         HaikeiETQ.SetActive(false);
         RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
-        qTransform.anchoredPosition = new Vector3(0,30,0);
+        qTransform.anchoredPosition = new Vector3(0,107,0);
         RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
-        mTransform.anchoredPosition = new Vector3(279,-159,0);
+        mTransform.anchoredPosition = new Vector3(800, -63, 0);
+        //ヒエラルキーの順序を入れ替え
+        Transform mp = GameObject.Find("MonarizaBase").transform;
+        mp.SetSiblingIndex(0);
+        Transform qp = GameObject.Find("MunkuBase").transform;
+        qp.SetSiblingIndex(4);
+    }
+    void ChangePlaceToEnemyTurnB() //自身がプレイヤー２ムンク、そして守備
+    {
+        HaikeiETM.SetActive(true);
+        RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
+        qTransform.anchoredPosition = new Vector3(266, 44, 0);
+        RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
+        mTransform.anchoredPosition = new Vector3(266, 30, 0); 
+        //ヒエラルキーの順序を入れ替え
+        Transform mp = GameObject.Find("MonarizaBase").transform;
+        mp.SetSiblingIndex(0);
+        Transform qp = GameObject.Find("MunkuBase").transform;
+        qp.SetSiblingIndex(3);
+
+    }
+    void ChangePlaceToPlayerTurnB()　//自身がプレイヤー２ムンク、そして攻撃
+    {
+        HaikeiETM.SetActive(false);
+        RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
+        qTransform.anchoredPosition = new Vector3(-800, 30, 0);
+        RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
+        mTransform.anchoredPosition = new Vector3(0, -63, 0);
         //ヒエラルキーの順序を入れ替え
         Transform mp = GameObject.Find("MonarizaBase").transform;
         mp.SetSiblingIndex(4);
