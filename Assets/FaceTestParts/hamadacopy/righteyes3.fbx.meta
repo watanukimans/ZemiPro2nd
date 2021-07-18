@@ -1,9 +1,49 @@
 fileFormatVersion: 2
-guid: b29cf10874ba8ef4789e4a7604f33153
+guid: 3c6ee13b3508c0746a1c06d63e65caa6
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert5
+    second: {fileID: 2100000, guid: ae87772cdfee72c4f8ab269e28b20cba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert6
+    second: {fileID: 2100000, guid: e4a23cfa6cc8a384f95f98b4953f63ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert7
+    second: {fileID: 2100000, guid: 54b34b47e9f3324489c425625ed1d225, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert9
+    second: {fileID: 2100000, guid: 080757c53af6cc043a8968f996692cf5, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: "\u53F3\u4E0A\u77BC"
+    second: {fileID: 2800000, guid: b906a0ff1c6ae7640b6eccb28f8d837d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: "\u53F3\u4E0B\u77BC"
+    second: {fileID: 2800000, guid: c0f612c8a6032b4429e7faa948421569, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: "\u53F3\u7709"
+    second: {fileID: 2800000, guid: 146bf29c25bd7f24a8ba8f8a194853c4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: "\u53F3\u77B3"
+    second: {fileID: 2800000, guid: 47455c8e474e56d49971264622f935ba, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

@@ -33,11 +33,12 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             if (GameManager.Instance.selectedcard != null) //カード情報が送られてきた時
             {
                 Debug.Log(GameManager.Instance.selectedcard + "が選ばれているよ");
-
+                /*
                 Transform myTransform = this.transform;
                 Vector3 pos = myTransform.position;
                 pos.y += 100f;
                 myTransform.position = pos;
+                */
                 // クリックされた時に行いたい処理
                 Debug.Log("押されたよ");
                 if (this.gameObject.tag == GameManager.Instance.selectedcard && this.gameObject.tag == "Card1")

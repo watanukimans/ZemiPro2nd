@@ -125,7 +125,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         //Debug.Log()
         if (nowgame){
-            //Debug.Log(vib);
+            //Debug.Log(qvib);
 
             //Debug.Log("相手のターンまで"+countDown);
             
@@ -145,7 +145,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
             if (selectedcard != null) //カード選ばれた時
             {
-                Debug.Log("うんこ");
+                //Debug.Log("うんこ");
                 if (isPlayerTurn) //攻撃側
                 {
                     MyAvator.GetComponent<AvatarController>().IsGetCard(selectedcard);
@@ -184,12 +184,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
             if (isPlayerTurn) //プレイヤーがカードを引く
             {
-                PlayerDeck.transform.position = new Vector3(350, 1600, 0);
-                EnemyDeck.transform.position = new Vector3(750,250, 0);
+                PlayerDeck.transform.position = new Vector3(350,1600,0);
+                EnemyDeck.transform.position = new Vector3(720, 250, 0);
             }
             else
             {
-                PlayerDeck.transform.position = new Vector3(750,250, 0);
+                PlayerDeck.transform.position = new Vector3(720, 250, 0);
                 EnemyDeck.transform.position = new Vector3(350, 1600, 0);
             }
 
@@ -1186,7 +1186,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.z
         );
         //振動
-        if (qvib > 0)
+        if (qvib >= 0)
         {
             qvib += 0.01f;
         }
