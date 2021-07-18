@@ -80,6 +80,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject HaikeiETM;
     public GameObject MunkuBase;
     public GameObject MonarizaBase;
+
+    public SkinnedMeshRenderer kutisitaMeshRenderer;
+    public SkinnedMeshRenderer kutiueMeshRenderer;
+    public SkinnedMeshRenderer LeftmayuMeshRenderer;
+    public SkinnedMeshRenderer LeftnamidaMeshRenderer;
+    public SkinnedMeshRenderer LefteyesitaMeshRenderer;
+    public SkinnedMeshRenderer LefteyeueMeshRenderer;
+    //public SkinnedMeshRenderer 
+    public GameObject kutisita;
     
 
     //ゲームスタートに関する表示
@@ -107,6 +116,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         jokernum = 100;
         clicked = false;
         selectedcard = null;
+        //
+        kutisita = GameObject.Find("MonarizaIndivi/Kutisita");
+        kutisitaMeshRenderer = kutisita.GetComponent<SkinnedMeshRenderer>();
     }
 
     public void GameStart() //スタートボタン押下時に作動する関数
@@ -125,11 +137,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         //Debug.Log()
         if (nowgame){
+            
             //Debug.Log(qvib);
 
             //Debug.Log("相手のターンまで"+countDown);
-            
-                if (countDown >= 0)
+
+            if (countDown >= 0)
                 {
                     countDown -= Time.deltaTime;
                     UIobj.fillAmount -= 1.0f / countTime * Time.deltaTime;
@@ -185,11 +198,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             if (isPlayerTurn) //プレイヤーがカードを引く
             {
                 PlayerDeck.transform.position = new Vector3(350,1600,0);
-                EnemyDeck.transform.position = new Vector3(720, 250, 0);
+                EnemyDeck.transform.position = new Vector3(17.5f, 12, 0);
             }
             else
             {
-                PlayerDeck.transform.position = new Vector3(720, 250, 0);
+                PlayerDeck.transform.position = new Vector3(17.5f, 12, 0);
                 EnemyDeck.transform.position = new Vector3(350, 1600, 0);
             }
 
@@ -952,6 +965,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             SitamabutaMinus();
             EyeBallMinus();
             NamidaMinus();
+            //EmotionMinusA();
         }
         else
         {
@@ -1405,5 +1419,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Transform nlTransform = QNamidaL.transform;
         //大きさ
         nlTransform.localScale = startSize;
+    }
+    
+    void EmotionMinusA()
+    {
+
+        kutisitaMeshRenderer.SetBlendShapeWeight(1, 100);
+        kutisitaMeshRenderer.SetBlendShapeWeight(0, 100);
+
     }
 }

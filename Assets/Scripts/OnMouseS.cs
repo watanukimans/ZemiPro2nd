@@ -33,17 +33,17 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //{
             Debug.Log("入ったよ");
         
-            if (distance < 121)
+            if (distance < 1)
             {
                 return;
             }
-            else if (distance >= 121&&distance <122)
+            else if (distance >= 1&&distance <2)
             {
             GameManager.Instance.EmotionMinus();
             GameManager.Instance.QEmotionMinus();
                 Debug.Log("1番近いカードです");
             }
-            else if (distance >= 243 && distance < 244)
+            else if (distance >= 2 && distance < 3)
             {
             for(int i=0; i<2; i++)
             {
@@ -52,7 +52,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
                 Debug.Log("2番目に近いカードです");
             }
-            else if (distance >= 365 && distance < 366)
+            else if (distance >= 3 && distance < 4)
             {
             for (int i = 0; i < 3; i++)
             {
@@ -61,7 +61,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             Debug.Log("3番目に近いカードです");
             }
-            else if (distance >= 486 && distance < 487)
+            else if (distance >= 4 && distance < 5)
             {
             for (int i = 0; i < 4; i++)
             {
@@ -70,7 +70,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             Debug.Log("4番目に近いカードです");
             }
-            else if (distance >= 608 && distance < 609)
+            else if (distance >= 5 && distance < 6)
             {
             for (int i = 0; i < 5; i++)
             {
@@ -79,7 +79,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             Debug.Log("5番目に近いカードです");
             }
-            else if (distance >= 730 && distance < 731)
+            else if (distance >= 6 && distance < 7)
             {
             for (int i = 0; i < 6; i++)
             {
@@ -88,7 +88,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             Debug.Log("6番目に近いカードです");
             }
-            else if (distance >= 851 && distance < 852)
+            else if (distance >= 7 && distance < 8)
             {
             for (int i = 0; i < 7; i++)
             {
@@ -97,7 +97,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             Debug.Log("7番目に近いカードです");
             }
-            else if (distance >= 973 && distance < 974)
+            else if (distance >= 9 && distance < 10)
             {
             for (int i = 0; i < 8; i++)
             {
@@ -106,7 +106,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             Debug.Log("8番目に近いカードです");
             }
-            else if (distance >= 1095 && distance < 1096)
+            else if (distance >= 10 && distance < 11)
             {
             for (int i = 0; i < 9; i++)
             {
@@ -124,16 +124,16 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Vector3 Apos = thisCard.transform.position;
         Vector3 Jpos = GameObject.FindGameObjectWithTag("Card10").transform.position;
         float distance = (Apos - Jpos).magnitude;
-        if (distance < 121)
+        if (distance < 1)
         {
             return;
         }
-        else if (distance >= 121 && distance < 122)
+        else if (distance >= 1 && distance < 2)
         {
             GameManager.Instance.EmotionPlus();
             GameManager.Instance.QEmotionPlus();
         }
-        else if (distance >= 243 && distance < 244)
+        else if (distance >= 2 && distance < 3)
         {
             for (int i = 0; i < 2; i++)
             {
@@ -141,7 +141,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 GameManager.Instance.QEmotionPlus();
             }
         }
-        else if (distance >= 365 && distance < 366)
+        else if (distance >= 3 && distance < 4)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -149,7 +149,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 GameManager.Instance.QEmotionPlus();
             }
         }
-        else if (distance >= 486 && distance < 487)
+        else if (distance >= 4 && distance < 5)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -157,7 +157,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 GameManager.Instance.QEmotionPlus();
             }
         }
-        else if (distance >= 608 && distance < 609)
+        else if (distance >= 5 && distance < 6)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -165,7 +165,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 GameManager.Instance.QEmotionPlus();
             }
         }
-        else if (distance >= 730 && distance < 731)
+        else if (distance >= 6 && distance < 7)
         {
             for (int i = 0; i < 6; i++)
             {
@@ -173,7 +173,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 GameManager.Instance.QEmotionPlus();
             }
         }
-        else if (distance >= 851 && distance < 852)
+        else if (distance >= 7 && distance < 8)
         {
             for (int i = 0; i < 7; i++)
             {
@@ -181,7 +181,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 GameManager.Instance.QEmotionPlus();
             }
         }
-        else if (distance >= 973 && distance < 974)
+        else if (distance >= 9 && distance < 10)
         {
             for (int i = 0; i < 8; i++)
             {
@@ -189,7 +189,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 GameManager.Instance.QEmotionPlus();
             }
         }
-        else if (distance >= 1095 && distance < 1096)
+        else if (distance >= 10 && distance < 11)
         {
             for (int i = 0; i < 9; i++)
             {
