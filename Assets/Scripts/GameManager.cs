@@ -101,10 +101,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public TestScene NetManager;
     public int MyNumber; //自分が何番目のプレイヤーかどうか
     public GameObject MyAvator;
+    private AvatarController avatarController;
     public Text console;
     public int jokernum;
     public bool clicked; //クリックされたかどうかを判断
-    public string selectedcard; //クリックされたカード
+    public int selectedcard; //クリックされたカード
+
+    /*
+    public bool drowed;
+    public int[] player1deck;
+    private int deckcount1;
+    public int[] player2deck;
+    private int deckcount2;
+    */
+
+    //public bool P2go;
 
     void Start()
     {
@@ -115,10 +126,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //スタート前
         jokernum = 100;
         clicked = false;
-        selectedcard = null;
+        selectedcard = 0;
         //
         kutisita = GameObject.Find("MonarizaIndivi/Kutisita");
         kutisitaMeshRenderer = kutisita.GetComponent<SkinnedMeshRenderer>();
+
+        //drowed = false;
+        //deckcount1 = 0;
+        //deckcount2 = 0;
+
+        //P2go = false;
     }
 
     public void GameStart() //スタートボタン押下時に作動する関数
@@ -137,11 +154,26 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         //Debug.Log()
         if (nowgame){
-            
+            /*
+            Debug.Log(deck[0]);
+            Debug.Log(deck[1]);
+            Debug.Log(deck2[0]);
+            Debug.Log(deck2[1]);
+            */
             //Debug.Log(qvib);
 
             //Debug.Log("相手のターンまで"+countDown);
 
+            /*
+            if (MyNumber == 2) //カード情報の受け取り
+            {
+                for(int u=0; u < 10; u++)
+                {
+                    player1deck[u] = avatarController.sendP1cards[u];
+                    player2deck[u] = avatarController.sendP2cards[u];
+                }
+            }
+            */
             if (countDown >= 0)
                 {
                     countDown -= Time.deltaTime;
@@ -156,12 +188,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     ChangeTurn();
                 }
 
-            if (selectedcard != null) //カード選ばれた時
+            if (selectedcard != 0) //カード選ばれた時
             {
                 //Debug.Log("うんこ");
                 if (isPlayerTurn) //攻撃側
                 {
-                    MyAvator.GetComponent<AvatarController>().IsGetCard(selectedcard);
+                    avatarController.IsGetCard(selectedcard);
                     //selectedcard = null;
                 }
                 else //守備側
@@ -219,8 +251,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 LoadImage.SetActive(false);
                 //アバターを処理
                 MyAvator = TestScene.My;
-
-                if(MyNumber == 1) //Player１だったら
+                avatarController = MyAvator.GetComponent<AvatarController>();
+                if (MyNumber == 1) //Player１だったら
                 {
                     ChangePlaceToPlayerTurnA();
                 }
@@ -230,7 +262,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     if (jokernum != 100) //どっちがジョーカーかわかる→スタート
                     {
                         Debug.Log("えはいzまっちゃいました？");
-                        StartGame();
+                        
+                            StartGame(); 
+                            
                     }
                 }
             }
@@ -246,11 +280,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             switch (decknum)
             {
                 case 1: //自分ジョーカー
-                    MyAvator.GetComponent<AvatarController>().IsGetJoker(2); //自分がジョーカーであることをAvatarに送信
+                    avatarController.IsGetJoker(2); //自分がジョーカーであることをAvatarに送信
                     ChangeTurn();
                     break;
                 case 2: //相手ジョーカー
-                    MyAvator.GetComponent<AvatarController>().IsGetJoker(1); //相手がジョーカーであることをAvatarに送信
+                    avatarController.IsGetJoker(1); //相手がジョーカーであることをAvatarに送信
                     PlayerTurn();
                     break;
             }
@@ -326,9 +360,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
 
         // デッキの一番上のカードを抜き取り、手札に加える
-        int cardID = deck[0];
-        deck.RemoveAt(0);
-        CreateCard(cardID, hand);
+        
+            int cardID = deck[0];
+        /*
+        if (MyNumber == 1)
+        {
+            player1deck[deckcount1] = deck[0];
+            avatarController.IsRailCard1(deckcount1, player1deck[deckcount1]);
+            deckcount1++;
+        }
+        */
+            //Debug.Log(deck[0]);
+            deck.RemoveAt(0);
+
+            CreateCard(cardID, hand);
+      
     }
     void DrowCard2(Transform hand) // カードを引く
     {
@@ -339,9 +385,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
 
         // デッキの一番上のカードを抜き取り、手札に加える
-        int cardID = deck2[0];
-        deck2.RemoveAt(0);
-        CreateCard2(cardID, hand);
+        
+            int cardID = deck2[0];
+        /*
+        if (MyNumber == 1)
+        {
+            player2deck[deckcount2] = deck2[0];
+            avatarController.IsRailCard2(deckcount2, player2deck[deckcount2]);
+            deckcount2++;
+        }
+            */
+            deck2.RemoveAt(0);
+            CreateCard2(cardID, hand);
+        
     }
     
     
@@ -422,15 +478,30 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void SetHand()
     {
         //ターンごとの手札シャッフル
+        
         ReShuffle();
         Shuffle();
+        /*
+        if(MyNumber == 2)
+        {
+            for (int j = 0; j < deck.Count; j++)
+            {
+                deck[j] = player1deck[j];
+                deck2[j] = player2deck[j];
+            }
+        }
+        */
         for (int i = 0; i < 11; i++)
         {
+            //player1deck[i] = deck[i];
             DrowCard(playerHand);
+            //drowed = true;
         }
         for (int i = 0; i < 11; i++)
         {
+            //player2deck[i] = deck2[i];
             DrowCard2(EnemyHand);
+            //drowed = true;
         }
     }
     void ReShuffle()
