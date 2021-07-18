@@ -135,6 +135,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject LoadImage;
     private bool nowgame;
 
+    //ステータス
+    public Image StatusMessage;
+    public Sprite Attack;
+    public Sprite Defence;
+
+    public GameObject Result;
+    public Image ResultMessage;
+    public Sprite Win;
+    public Sprite Lose;
+    private bool finishflg;
 
     //ネット関連
     public TestScene NetManager;
@@ -145,6 +155,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public int jokernum;
     public bool clicked; //クリックされたかどうかを判断
     public int selectedcard; //クリックされたカード
+
+    public Text LoginText;
+
+    private AudioSource bgm;
+    public AudioClip title;
+    public AudioClip play; 
 
     /*
     public bool drowed;
@@ -209,6 +225,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         mrighteyeue = GameObject.Find("munkuFBX/MunkuRightEyeue");
         mrighteyeueMeshRenderer = mrighteyeue.GetComponent<SkinnedMeshRenderer>();
 
+
+        finishflg = false;
+        bgm = this.gameObject.GetComponent<AudioSource>();
         //drowed = false;
         //deckcount1 = 0;
         //deckcount2 = 0;
@@ -231,28 +250,31 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void Update()
     {
         //Debug.Log(w);
-        if (nowgame){
-            /*
-            Debug.Log(deck[0]);
-            Debug.Log(deck[1]);
-            Debug.Log(deck2[0]);
-            Debug.Log(deck2[1]);
-            */
-            //Debug.Log(qvib);
-
-            //Debug.Log("相手のターンまで"+countDown);
-
-            /*
-            if (MyNumber == 2) //カード情報の受け取り
+        if (!finishflg)
+        {
+            if (nowgame)
             {
-                for(int u=0; u < 10; u++)
+                /*
+                Debug.Log(deck[0]);
+                Debug.Log(deck[1]);
+                Debug.Log(deck2[0]);
+                Debug.Log(deck2[1]);
+                */
+                //Debug.Log(qvib);
+
+                //Debug.Log("相手のターンまで"+countDown);
+
+                /*
+                if (MyNumber == 2) //カード情報の受け取り
                 {
-                    player1deck[u] = avatarController.sendP1cards[u];
-                    player2deck[u] = avatarController.sendP2cards[u];
+                    for(int u=0; u < 10; u++)
+                    {
+                        player1deck[u] = avatarController.sendP1cards[u];
+                        player2deck[u] = avatarController.sendP2cards[u];
+                    }
                 }
-            }
-            */
-            if (countDown >= 0)
+                */
+                if (countDown >= 0)
                 {
                     countDown -= Time.deltaTime;
                     UIobj.fillAmount -= 1.0f / countTime * Time.deltaTime;
@@ -266,170 +288,179 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     ChangeTurn();
                 }
 
-            if (selectedcard != 0) //カード選ばれた時
-            {
-                //Debug.Log("うんこ");
-                if (isPlayerTurn) //攻撃側
+                if (selectedcard != 0) //カード選ばれた時
                 {
-                    avatarController.IsGetCard(selectedcard);
-                    //selectedcard = null;
-                }
-                else //守備側
-                {
-
-                }
-            }
-            
-            //目の振動
-            if (Emotion < 10)
-            {
-                EyeRR.position += new Vector3(vib, 0, 0);
-                EyeLL.position += new Vector3(vib, 0, 0);
-                vibcount++;
-                if (vibcount == 50)
-                {
-                    vibcount = 0;
-                    vib *= -1;
-                }
-            }
-            if (QEmotion < 10)
-            {
-                QEyeRR.position += new Vector3(qvib, 0, 0);
-                QEyeLL.position += new Vector3(qvib, 0, 0);
-                qvibcount++;
-                if (qvibcount == 50)
-                {
-                    qvibcount = 0;
-                    qvib *= -1;
-                }
-            }
-            //顔の変化
-            currentTime += Time.deltaTime;
-            if(currentTime >span)
-            {
-                currentTime = 0f;
-                if (j == 0){
-                    if (w <= 100)
+                    //Debug.Log("うんこ");
+                    if (isPlayerTurn) //攻撃側
                     {
-                        w += h;
-                        if (we >= 1)
-                        {
-                            we += he;
-                        }
-                        Transform erTransform = EyeR.transform;
-                        //大きさ
-                        erTransform.localScale = new Vector3(
-                            erTransform.localScale.x / we,
-                            erTransform.localScale.y / we,
-                            erTransform.localScale.z);
-                        Transform elTransform = EyeL.transform;
-                        //大きさ
-                        elTransform.localScale = new Vector3(
-                            elTransform.localScale.x / we,
-                            elTransform.localScale.y / we,
-                            elTransform.localScale.z
-                        );
-                        Transform qelTransform = QEyeL.transform;
-                        //大きさ
-                        qelTransform.localScale = new Vector3(
-                            qelTransform.localScale.x / we,
-                            qelTransform.localScale.y / we,
-                            qelTransform.localScale.z
-                        );
-                        Transform qerTransform = QEyeR.transform;
-                        //大きさ
-                        qerTransform.localScale = new Vector3(
-                            qerTransform.localScale.x / we,
-                            qerTransform.localScale.y / we,
-                            qerTransform.localScale.z
-                        );
+                        avatarController.IsGetCard(selectedcard);
+                        //selectedcard = null;
+                    }
+                    else //守備側
+                    {
+
                     }
                 }
-                kutisitaMeshRenderer.SetBlendShapeWeight(0, w);
-                kutiueMeshRenderer.SetBlendShapeWeight(0, w);
-                leftmayuMeshRenderer.SetBlendShapeWeight(0, w);
-                leftnamidaMeshRenderer.SetBlendShapeWeight(0, w);
-                lefteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
-                lefteyeueMeshRenderer.SetBlendShapeWeight(0, w);
-                rightmayuMeshRenderer.SetBlendShapeWeight(0, w);
-                rightnamidaMeshRenderer.SetBlendShapeWeight(0, w);
-                righteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
-                righteyeueMeshRenderer.SetBlendShapeWeight(0, w);
-                mkutisitaMeshRenderer.SetBlendShapeWeight(0, w);
-                mkutiueMeshRenderer.SetBlendShapeWeight(0, w);
-                mleftmayuMeshRenderer.SetBlendShapeWeight(0, w);
-                mleftnamidaMeshRenderer.SetBlendShapeWeight(0, w);
-                mlefteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
-                mlefteyeueMeshRenderer.SetBlendShapeWeight(0, w);
-                mrightmayuMeshRenderer.SetBlendShapeWeight(0, w);
-                mrightnamidaMeshRenderer.SetBlendShapeWeight(0, w);
-                mrighteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
-                mrighteyeueMeshRenderer.SetBlendShapeWeight(0, w);
 
-            }
-            //funamon
-
-            if (isPlayerTurn) //プレイヤーがカードを引く
-            {
-                PlayerDeck.transform.position = new Vector3(350,1600,0);
-                EnemyDeck.transform.position = new Vector3(17.5f, 12, 0);
-            }
-            else
-            {
-                PlayerDeck.transform.position = new Vector3(17.5f, 12, 0);
-                EnemyDeck.transform.position = new Vector3(350, 1600, 0);
-            }
-
-            if (MyNumber == 1) //プレイヤー１モナリザ
-            {
-                if (isPlayerTurn) //攻撃
+                //目の振動
+                if (Emotion < 10)
                 {
-                    ChangePlaceToPlayerTurnA();
-                }
-                else //守備
-                {
-                    ChangePlaceToEnemyTurnA();
-                }
-            }
-            else if(MyNumber == 2) //プレイヤー２ムンク
-            {
-                if (isPlayerTurn) //攻撃
-                {
-                    ChangePlaceToPlayerTurnB();
-                }
-                else //守備
-                {
-                    ChangePlaceToEnemyTurnB();
-                }
-            }
-
-            
-
-        }
-        else //ゲーム開始前
-        {
-            MyNumber = NetManager.Number;
-            
-            if(MyNumber >= 1) //入室完了したら、→以下ゲーム開始前の処理。ここでPlayer１かPlayer２かがわかります。今は同じ挙動するけど、Player１をここでいうPlayerにしてPlayer２をここでいうEnemyにしてやればうまく擬似的にできているように見えるはず
-            {
-                //StartButtun.SetActive(true);
-                LoadImage.SetActive(false);
-                //アバターを処理
-                MyAvator = TestScene.My;
-                avatarController = MyAvator.GetComponent<AvatarController>();
-                if (MyNumber == 1) //Player１だったら
-                {
-                    ChangePlaceToPlayerTurnA();
-                }
-                else if(MyNumber == 2) //Player2だったら
-                {
-                    ChangePlaceToPlayerTurnB();
-                    if (jokernum != 100) //どっちがジョーカーかわかる→スタート
+                    EyeRR.position += new Vector3(vib, 0, 0);
+                    EyeLL.position += new Vector3(vib, 0, 0);
+                    vibcount++;
+                    if (vibcount == 50)
                     {
-                        Debug.Log("えはいzまっちゃいました？");
-                        
-                            StartGame(); 
-                            
+                        vibcount = 0;
+                        vib *= -1;
+                    }
+                }
+                if (QEmotion < 10)
+                {
+                    QEyeRR.position += new Vector3(qvib, 0, 0);
+                    QEyeLL.position += new Vector3(qvib, 0, 0);
+                    qvibcount++;
+                    if (qvibcount == 50)
+                    {
+                        qvibcount = 0;
+                        qvib *= -1;
+                    }
+                }
+                //顔の変化
+                currentTime += Time.deltaTime;
+                if (currentTime > span)
+                {
+                    currentTime = 0f;
+                    if (j == 0)
+                    {
+                        if (w <= 100)
+                        {
+                            w += h;
+                            if (we >= 1)
+                            {
+                                we += he;
+                            }
+                            Transform erTransform = EyeR.transform;
+                            //大きさ
+                            erTransform.localScale = new Vector3(
+                                erTransform.localScale.x / we,
+                                erTransform.localScale.y / we,
+                                erTransform.localScale.z);
+                            Transform elTransform = EyeL.transform;
+                            //大きさ
+                            elTransform.localScale = new Vector3(
+                                elTransform.localScale.x / we,
+                                elTransform.localScale.y / we,
+                                elTransform.localScale.z
+                            );
+                            Transform qelTransform = QEyeL.transform;
+                            //大きさ
+                            qelTransform.localScale = new Vector3(
+                                qelTransform.localScale.x / we,
+                                qelTransform.localScale.y / we,
+                                qelTransform.localScale.z
+                            );
+                            Transform qerTransform = QEyeR.transform;
+                            //大きさ
+                            qerTransform.localScale = new Vector3(
+                                qerTransform.localScale.x / we,
+                                qerTransform.localScale.y / we,
+                                qerTransform.localScale.z
+                            );
+                        }
+                    }
+                    kutisitaMeshRenderer.SetBlendShapeWeight(0, w);
+                    kutiueMeshRenderer.SetBlendShapeWeight(0, w);
+                    leftmayuMeshRenderer.SetBlendShapeWeight(0, w);
+                    leftnamidaMeshRenderer.SetBlendShapeWeight(0, w);
+                    lefteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
+                    lefteyeueMeshRenderer.SetBlendShapeWeight(0, w);
+                    rightmayuMeshRenderer.SetBlendShapeWeight(0, w);
+                    rightnamidaMeshRenderer.SetBlendShapeWeight(0, w);
+                    righteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
+                    righteyeueMeshRenderer.SetBlendShapeWeight(0, w);
+                    mkutisitaMeshRenderer.SetBlendShapeWeight(0, w);
+                    mkutiueMeshRenderer.SetBlendShapeWeight(0, w);
+                    mleftmayuMeshRenderer.SetBlendShapeWeight(0, w);
+                    mleftnamidaMeshRenderer.SetBlendShapeWeight(0, w);
+                    mlefteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
+                    mlefteyeueMeshRenderer.SetBlendShapeWeight(0, w);
+                    mrightmayuMeshRenderer.SetBlendShapeWeight(0, w);
+                    mrightnamidaMeshRenderer.SetBlendShapeWeight(0, w);
+                    mrighteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
+                    mrighteyeueMeshRenderer.SetBlendShapeWeight(0, w);
+
+                }
+                //funamon
+
+                if (isPlayerTurn) //プレイヤーがカードを引く
+                {
+                    PlayerDeck.transform.position = new Vector3(350, 1600, 0);
+                    EnemyDeck.transform.position = new Vector3(17.5f, 12, 0);
+                }
+                else
+                {
+                    PlayerDeck.transform.position = new Vector3(17.5f, 12, 0);
+                    EnemyDeck.transform.position = new Vector3(350, 1600, 0);
+                }
+
+                if (MyNumber == 1) //プレイヤー１モナリザ
+                {
+                    if (isPlayerTurn) //攻撃
+                    {
+                        ChangePlaceToPlayerTurnA();
+                    }
+                    else //守備
+                    {
+                        ChangePlaceToEnemyTurnA();
+                    }
+                }
+                else if (MyNumber == 2) //プレイヤー２ムンク
+                {
+                    if (isPlayerTurn) //攻撃
+                    {
+                        ChangePlaceToPlayerTurnB();
+                    }
+                    else //守備
+                    {
+                        ChangePlaceToEnemyTurnB();
+                    }
+                }
+
+
+
+            }
+            else //ゲーム開始前
+            {
+                MyNumber = NetManager.Number;
+
+                if (MyNumber >= 1) //入室完了したら、→以下ゲーム開始前の処理。ここでPlayer１かPlayer２かがわかります。今は同じ挙動するけど、Player１をここでいうPlayerにしてPlayer２をここでいうEnemyにしてやればうまく擬似的にできているように見えるはず
+                {
+                    if (MyNumber < 3) //プレイヤー１か２まで入室可能
+                    {
+                        //StartButtun.SetActive(true);
+                        LoadImage.SetActive(false);
+                        //アバターを処理
+                        MyAvator = TestScene.My;
+                        avatarController = MyAvator.GetComponent<AvatarController>();
+                        if (MyNumber == 1) //Player１だったら
+                        {
+                            ChangePlaceToPlayerTurnA();
+                        }
+                        else if (MyNumber == 2) //Player2だったら
+                        {
+                            ChangePlaceToPlayerTurnB();
+                            if (jokernum != 100) //どっちがジョーカーかわかる→スタート
+                            {
+                                Debug.Log("えはいzまっちゃいました？");
+
+                                StartGame();
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        LoginText.text = "現在入室禁止です";
                     }
                 }
             }
@@ -437,6 +468,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     void StartGame()
     {
+        bgm.clip = play;
+        bgm.Play();
         // 初期手札を配る
         if (MyNumber == 1) //プレイヤー１での処理を基準にジョーカーの場所を決める
         {
@@ -451,6 +484,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 case 2: //相手ジョーカー
                     avatarController.IsGetJoker(1); //相手がジョーカーであることをAvatarに送信
                     PlayerTurn();
+                    StatusMessage.gameObject.SetActive(true);
+                    if (isPlayerTurn) //攻撃
+                    {
+                        StatusMessage.sprite = Attack;
+                    }
+                    else //守備
+                    {
+                        StatusMessage.sprite = Defence;
+                    }
                     break;
             }
             //SetStartHand();
@@ -477,6 +519,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     //Debug.Log("ふふふ");
                     //MyAvator.GetComponent<AvatarController>().IsGetJoker(0); //相手がジョーカーであることをAvatarに送信
                     PlayerTurn();
+                    StatusMessage.gameObject.SetActive(true);
+                    if (isPlayerTurn) //攻撃
+                    {
+                        StatusMessage.sprite = Attack;
+                    }
+                    else //守備
+                    {
+                        StatusMessage.sprite = Attack;
+                    }
                     break;
             }
         }
@@ -580,6 +631,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void ChangeTurn() // ターンエンド処理
     {
         isPlayerTurn = !isPlayerTurn; // ターンを逆にする
+        StatusMessage.gameObject.SetActive(true);
+        if (isPlayerTurn) //攻撃
+        {
+            StatusMessage.sprite = Attack;
+        }
+        else //守備
+        {
+            StatusMessage.sprite = Defence;
+        }
+
         TurnCalc(); // ターンを相手に回す
     }
     void PlayerTurn()
@@ -809,7 +870,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             deck2.Remove(t8);
             deck2.Remove(t9);
             //勝利条件を満たした
+            Debug.Log("おわった");
+            Invoke("Result", 1.0f);
+            finishflg = true;
         }
+    }
+
+    void ResultMethod()
+    {
+        Result.SetActive(true);
+        ResultMessage.sprite = Win;
     }
     
     void DeleteCard()
@@ -1718,4 +1788,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         yield return null;
     }
     */
+
+    public void Quit()
+    {
+        #if UNITY_EDITOR
+              UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_STANDALONE
+              UnityEngine.Application.Quit();
+        #endif
+    }
 }
