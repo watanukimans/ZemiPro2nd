@@ -24,6 +24,19 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
     public Sprite joker;
     float seconds;
 
+    //数字関連
+    
+    public Sprite zero;
+    public Sprite one;
+    public Sprite ntwo;
+    public Sprite nthree;
+    public Sprite nfour;
+    public Sprite nfive;
+    public Sprite nsix;
+    public Sprite nseven;
+    public Sprite neight;
+    public Sprite nnine;
+
     public int selectCard;
 
     private void Update()
@@ -53,9 +66,10 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
         if (this.gameObject.tag == "Card" + GameManager.Instance.selectedcard && this.gameObject.tag == "Card1")
         {
             Transform myTransform = this.transform;
-            Vector3 pos = myTransform.position;
-            pos.y += 100f;
-            myTransform.position = pos;
+            //Vector3 pos = myTransform.position;
+            //pos.y += 100f;
+            //myTransform.position = pos;
+            myTransform.localPosition = new Vector3(150, 300, 1);
 
             //ゲージカウントをリセット
             GameManager.Instance.MaxGauge();
@@ -240,9 +254,9 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
 
         //Y座標を移動
         Transform myTransform = this.transform;
-        Vector3 pos = myTransform.position;
-        pos.y += 100f;
-        myTransform.position = pos;
+        //Vector3 pos = myTransform.localPosition;
+        //pos.y += 100f;
+        myTransform.localPosition = new Vector3(150, 300, 1);
         // クリックされた時に行いたい処理
         Debug.Log("押されたよ");
         if (this.gameObject.CompareTag("Card1"))
@@ -390,38 +404,47 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
         if (deCard == 1)
         {
             GameManager.Instance.t1 = n;
+            GameManager.Instance.cardnum.sprite = neight;
         }
         if (deCard == 2)
         {
             GameManager.Instance.t2 = n;
+            GameManager.Instance.cardnum.sprite = nseven;
         }
         if (deCard == 3)
         {
             GameManager.Instance.t3 = n;
+            GameManager.Instance.cardnum.sprite = nsix;
         }
         if (deCard == 4)
         {
             GameManager.Instance.t4 = n;
+            GameManager.Instance.cardnum.sprite = nfive;
         }
         if (deCard == 5)
         {
             GameManager.Instance.t5 = n;
+            GameManager.Instance.cardnum.sprite = nfour;
         }
         if (deCard == 6)
         {
             GameManager.Instance.t6 = n;
+            GameManager.Instance.cardnum.sprite = nthree;
         }
         if (deCard == 7)
         {
             GameManager.Instance.t7 = n;
+            GameManager.Instance.cardnum.sprite = ntwo;
         }
         if (deCard == 8)
         {
             GameManager.Instance.t8 = n;
+            GameManager.Instance.cardnum.sprite = one;
         }
         if (deCard == 9)
         {
             GameManager.Instance.t9 = n;
+            GameManager.Instance.cardnum.sprite = zero;
         }
 
     }

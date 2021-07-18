@@ -12,6 +12,11 @@ public class ClickSmile : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("スマイルください");
         GameManager.Instance.EmotionPlus();
+        if (GameManager.Instance.w > 5)
+        {
+            GameManager.Instance.w -= 5;
+        }
     }
 }

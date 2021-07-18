@@ -101,6 +101,17 @@ MonoBehaviour:
   eight: {fileID: 21300000, guid: fe4a6aab39acad142b967c72f0982941, type: 3}
   nine: {fileID: 21300000, guid: 63956a0f7ec18f44b8ef1ea914834766, type: 3}
   joker: {fileID: 21300000, guid: a149a5cddbea32746b26910bdb81d2a2, type: 3}
+  zero: {fileID: 21300000, guid: 42c1999e6edb5944c87f7432be665d4b, type: 3}
+  one: {fileID: 21300000, guid: 5cf317a2a29f970478e6dc22adfa6fb4, type: 3}
+  ntwo: {fileID: 21300000, guid: 027796c612b25fd4caf2a68f01c028b2, type: 3}
+  nthree: {fileID: 21300000, guid: 8f52d0fff5d64d0419202fbbefdb09b2, type: 3}
+  nfour: {fileID: 21300000, guid: 97ea420a057403f42b9e49737ba1168b, type: 3}
+  nfive: {fileID: 21300000, guid: ccc3cb47d7d6bba43905a5b51980ad00, type: 3}
+  nsix: {fileID: 21300000, guid: 5de9b5469c03c9241945f3a9f341e0b9, type: 3}
+  nseven: {fileID: 21300000, guid: d320333918c4aa941910e9bcf5fd4064, type: 3}
+  neight: {fileID: 21300000, guid: a9e5b9a816aee7f4e8270486a1b59504, type: 3}
+  nnine: {fileID: 21300000, guid: f5002ee0506cf3e479be2b3c09300422, type: 3}
+  selectCard: 0
 --- !u!61 &-1004365527092005811
 BoxCollider2D:
   m_ObjectHideFlags: 0

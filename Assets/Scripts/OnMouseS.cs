@@ -35,17 +35,20 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         
             if (distance < 1)
             {
-                return;
+            GameManager.Instance.j = 1;
+            return;
             }
             else if (distance >= 1&&distance <2)
             {
+            GameManager.Instance.j = 0;
             GameManager.Instance.EmotionMinus();
             GameManager.Instance.QEmotionMinus();
                 Debug.Log("1番近いカードです");
             }
             else if (distance >= 2 && distance < 3)
             {
-            for(int i=0; i<2; i++)
+            GameManager.Instance.j = 0;
+            for (int i=0; i<2; i++)
             {
                 GameManager.Instance.EmotionMinus();
                 GameManager.Instance.QEmotionMinus();
@@ -54,6 +57,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             else if (distance >= 3 && distance < 4)
             {
+            GameManager.Instance.j = 0;
             for (int i = 0; i < 3; i++)
             {
                 GameManager.Instance.EmotionMinus();
@@ -63,6 +67,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             else if (distance >= 4 && distance < 5)
             {
+            GameManager.Instance.j = 0;
             for (int i = 0; i < 4; i++)
             {
                 GameManager.Instance.EmotionMinus();
@@ -72,6 +77,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             else if (distance >= 5 && distance < 6)
             {
+            GameManager.Instance.j = 0;
             for (int i = 0; i < 5; i++)
             {
                 GameManager.Instance.EmotionMinus();
@@ -81,6 +87,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             else if (distance >= 6 && distance < 7)
             {
+            GameManager.Instance.j = 0;
             for (int i = 0; i < 6; i++)
             {
                 GameManager.Instance.EmotionMinus();
@@ -90,6 +97,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             else if (distance >= 7 && distance < 8)
             {
+            GameManager.Instance.j = 0;
             for (int i = 0; i < 7; i++)
             {
                 GameManager.Instance.EmotionMinus();
@@ -99,6 +107,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             else if (distance >= 9 && distance < 10)
             {
+            GameManager.Instance.j = 0;
             for (int i = 0; i < 8; i++)
             {
                 GameManager.Instance.EmotionMinus();
@@ -108,6 +117,7 @@ public class OnMouseS : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             else if (distance >= 10 && distance < 11)
             {
+            GameManager.Instance.j = 0;
             for (int i = 0; i < 9; i++)
             {
                 GameManager.Instance.EmotionMinus();

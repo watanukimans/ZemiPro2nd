@@ -75,7 +75,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public RectTransform QEyeLL;
     Vector3 startSize;
 
-    
+    public GameObject spotLight;
     public GameObject HaikeiETQ;
     public GameObject HaikeiETM;
     public GameObject MunkuBase;
@@ -83,13 +83,52 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public SkinnedMeshRenderer kutisitaMeshRenderer;
     public SkinnedMeshRenderer kutiueMeshRenderer;
-    public SkinnedMeshRenderer LeftmayuMeshRenderer;
-    public SkinnedMeshRenderer LeftnamidaMeshRenderer;
-    public SkinnedMeshRenderer LefteyesitaMeshRenderer;
-    public SkinnedMeshRenderer LefteyeueMeshRenderer;
-    //public SkinnedMeshRenderer 
+    public SkinnedMeshRenderer leftmayuMeshRenderer;
+    public SkinnedMeshRenderer leftnamidaMeshRenderer;
+    public SkinnedMeshRenderer lefteyesitaMeshRenderer;
+    public SkinnedMeshRenderer lefteyeueMeshRenderer;
+    public SkinnedMeshRenderer rightmayuMeshRenderer;
+    public SkinnedMeshRenderer rightnamidaMeshRenderer;
+    public SkinnedMeshRenderer righteyesitaMeshRenderer;
+    public SkinnedMeshRenderer righteyeueMeshRenderer;
     public GameObject kutisita;
-    
+    public GameObject kutiue;
+    public GameObject leftmayu;
+    public GameObject leftnamida;
+    public GameObject lefteyesita;
+    public GameObject lefteyeue;
+    public GameObject rightmayu;
+    public GameObject rightnamida;
+    public GameObject righteyesita;
+    public GameObject righteyeue;
+    public SkinnedMeshRenderer mkutisitaMeshRenderer;
+    public SkinnedMeshRenderer mkutiueMeshRenderer;
+    public SkinnedMeshRenderer mleftmayuMeshRenderer;
+    public SkinnedMeshRenderer mleftnamidaMeshRenderer;
+    public SkinnedMeshRenderer mlefteyesitaMeshRenderer;
+    public SkinnedMeshRenderer mlefteyeueMeshRenderer;
+    public SkinnedMeshRenderer mrightmayuMeshRenderer;
+    public SkinnedMeshRenderer mrightnamidaMeshRenderer;
+    public SkinnedMeshRenderer mrighteyesitaMeshRenderer;
+    public SkinnedMeshRenderer mrighteyeueMeshRenderer;
+    public GameObject mkutisita;
+    public GameObject mkutiue;
+    public GameObject mleftmayu;
+    public GameObject mleftnamida;
+    public GameObject mlefteyesita;
+    public GameObject mlefteyeue;
+    public GameObject mrightmayu;
+    public GameObject mrightnamida;
+    public GameObject mrighteyesita;
+    public GameObject mrighteyeue;
+    public int h;//顔の変化量
+    public float span = 0.1f;
+    private float currentTime = 0f;
+    public int j = 1;//顔の状態
+    public int w = 0;
+    public float he;//目の変化量
+    public float we =1f;
+    public Image cardnum;
 
     //ゲームスタートに関する表示
     public GameObject StartButtun;
@@ -130,6 +169,45 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //
         kutisita = GameObject.Find("MonarizaIndivi/Kutisita");
         kutisitaMeshRenderer = kutisita.GetComponent<SkinnedMeshRenderer>();
+        kutiue = GameObject.Find("MonarizaIndivi/Kutiue");
+        kutiueMeshRenderer = kutiue.GetComponent<SkinnedMeshRenderer>();
+        leftmayu = GameObject.Find("MonarizaIndivi/LeftEyemayu");
+        leftmayuMeshRenderer = leftmayu.GetComponent<SkinnedMeshRenderer>();
+        leftnamida = GameObject.Find("MonarizaIndivi/LeftEyenamida");
+        leftnamidaMeshRenderer = leftnamida.GetComponent<SkinnedMeshRenderer>();
+        lefteyesita = GameObject.Find("MonarizaIndivi/LeftEyesita");
+        lefteyesitaMeshRenderer = lefteyesita.GetComponent<SkinnedMeshRenderer>();
+        lefteyeue = GameObject.Find("MonarizaIndivi/LeftEyeue");
+        lefteyeueMeshRenderer = lefteyeue.GetComponent<SkinnedMeshRenderer>();
+        rightmayu = GameObject.Find("MonarizaIndivi/RightEyemayu");
+        rightmayuMeshRenderer = rightmayu.GetComponent<SkinnedMeshRenderer>();
+        rightnamida = GameObject.Find("MonarizaIndivi/RightEyenamida");
+        rightnamidaMeshRenderer = rightnamida.GetComponent<SkinnedMeshRenderer>();
+        righteyesita = GameObject.Find("MonarizaIndivi/RightEyesita");
+        righteyesitaMeshRenderer = righteyesita.GetComponent<SkinnedMeshRenderer>();
+        righteyeue = GameObject.Find("MonarizaIndivi/RightEyeue");
+        righteyeueMeshRenderer = righteyeue.GetComponent<SkinnedMeshRenderer>();
+
+        mkutisita = GameObject.Find("munkuFBX/MunkuKutisita");
+        mkutisitaMeshRenderer = mkutisita.GetComponent<SkinnedMeshRenderer>();
+        mkutiue = GameObject.Find("munkuFBX/MunkuKutiue");
+        mkutiueMeshRenderer = mkutiue.GetComponent<SkinnedMeshRenderer>();
+        mleftmayu = GameObject.Find("munkuFBX/MunkuLeftEyemayu");
+        mleftmayuMeshRenderer = mleftmayu.GetComponent<SkinnedMeshRenderer>();
+        mleftnamida = GameObject.Find("munkuFBX/MunkuLeftEyenamida");
+        mleftnamidaMeshRenderer = mleftnamida.GetComponent<SkinnedMeshRenderer>();
+        mlefteyesita = GameObject.Find("munkuFBX/MunkuLeftEyesita");
+        mlefteyesitaMeshRenderer = mlefteyesita.GetComponent<SkinnedMeshRenderer>();
+        mlefteyeue = GameObject.Find("munkuFBX/MunkuLeftEyeue");
+        mlefteyeueMeshRenderer = mlefteyeue.GetComponent<SkinnedMeshRenderer>();
+        mrightmayu = GameObject.Find("munkuFBX/MunkuRightEyemayu");
+        mrightmayuMeshRenderer = mrightmayu.GetComponent<SkinnedMeshRenderer>();
+        mrightnamida = GameObject.Find("munkuFBX/MunkuRightEyenamida");
+        mrightnamidaMeshRenderer = mrightnamida.GetComponent<SkinnedMeshRenderer>();
+        mrighteyesita = GameObject.Find("munkuFBX/MunkuRightEyesita");
+        mrighteyesitaMeshRenderer = mrighteyesita.GetComponent<SkinnedMeshRenderer>();
+        mrighteyeue = GameObject.Find("munkuFBX/MunkuRightEyeue");
+        mrighteyeueMeshRenderer = mrighteyeue.GetComponent<SkinnedMeshRenderer>();
 
         //drowed = false;
         //deckcount1 = 0;
@@ -152,7 +230,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     void Update()
     {
-        //Debug.Log()
+        //Debug.Log(w);
         if (nowgame){
             /*
             Debug.Log(deck[0]);
@@ -224,6 +302,70 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     qvibcount = 0;
                     qvib *= -1;
                 }
+            }
+            //顔の変化
+            currentTime += Time.deltaTime;
+            if(currentTime >span)
+            {
+                currentTime = 0f;
+                if (j == 0){
+                    if (w <= 100)
+                    {
+                        w += h;
+                        if (we >= 1)
+                        {
+                            we += he;
+                        }
+                        Transform erTransform = EyeR.transform;
+                        //大きさ
+                        erTransform.localScale = new Vector3(
+                            erTransform.localScale.x / we,
+                            erTransform.localScale.y / we,
+                            erTransform.localScale.z);
+                        Transform elTransform = EyeL.transform;
+                        //大きさ
+                        elTransform.localScale = new Vector3(
+                            elTransform.localScale.x / we,
+                            elTransform.localScale.y / we,
+                            elTransform.localScale.z
+                        );
+                        Transform qelTransform = QEyeL.transform;
+                        //大きさ
+                        qelTransform.localScale = new Vector3(
+                            qelTransform.localScale.x / we,
+                            qelTransform.localScale.y / we,
+                            qelTransform.localScale.z
+                        );
+                        Transform qerTransform = QEyeR.transform;
+                        //大きさ
+                        qerTransform.localScale = new Vector3(
+                            qerTransform.localScale.x / we,
+                            qerTransform.localScale.y / we,
+                            qerTransform.localScale.z
+                        );
+                    }
+                }
+                kutisitaMeshRenderer.SetBlendShapeWeight(0, w);
+                kutiueMeshRenderer.SetBlendShapeWeight(0, w);
+                leftmayuMeshRenderer.SetBlendShapeWeight(0, w);
+                leftnamidaMeshRenderer.SetBlendShapeWeight(0, w);
+                lefteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
+                lefteyeueMeshRenderer.SetBlendShapeWeight(0, w);
+                rightmayuMeshRenderer.SetBlendShapeWeight(0, w);
+                rightnamidaMeshRenderer.SetBlendShapeWeight(0, w);
+                righteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
+                righteyeueMeshRenderer.SetBlendShapeWeight(0, w);
+                mkutisitaMeshRenderer.SetBlendShapeWeight(0, w);
+                mkutiueMeshRenderer.SetBlendShapeWeight(0, w);
+                mleftmayuMeshRenderer.SetBlendShapeWeight(0, w);
+                mleftnamidaMeshRenderer.SetBlendShapeWeight(0, w);
+                mlefteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
+                mlefteyeueMeshRenderer.SetBlendShapeWeight(0, w);
+                mrightmayuMeshRenderer.SetBlendShapeWeight(0, w);
+                mrightnamidaMeshRenderer.SetBlendShapeWeight(0, w);
+                mrighteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
+                mrighteyeueMeshRenderer.SetBlendShapeWeight(0, w);
+
             }
             //funamon
 
@@ -497,7 +639,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             deck2[m] = temp2;
         }
     }
-    //ここから下未実装
+    
     void SetHand()
     {
         //ターンごとの手札シャッフル
@@ -709,6 +851,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void ChangePlaceToEnemyTurnA() //自身がプレイヤー１モナリザ、そして守備
     {
         HaikeiETQ.SetActive(true);
+        //スポットライトを消す
+        spotLight.SetActive(false);
         RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
         qTransform.anchoredPosition = new Vector3(0, -63, 0); 
         RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
@@ -724,6 +868,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void ChangePlaceToPlayerTurnA() //自身がプレイヤー１モナリザ、そして攻撃
     {
         HaikeiETQ.SetActive(false);
+        spotLight.SetActive(true);
         RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
         qTransform.anchoredPosition = new Vector3(0,107,0);
         RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
@@ -737,6 +882,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void ChangePlaceToEnemyTurnB() //自身がプレイヤー２ムンク、そして守備
     {
         HaikeiETM.SetActive(true);
+        spotLight.SetActive(false);
         RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
         qTransform.anchoredPosition = new Vector3(266, 44, 0);
         RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
@@ -751,6 +897,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void ChangePlaceToPlayerTurnB()　//自身がプレイヤー２ムンク、そして攻撃
     {
         HaikeiETM.SetActive(false);
+        spotLight.SetActive(true);
         RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
         qTransform.anchoredPosition = new Vector3(-800, 30, 0);
         RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
@@ -877,7 +1024,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     void EyeBallPlus()
     {
-
+        /*
         Transform erTransform = EyeR.transform;
         //大きさ
         erTransform.localScale = new Vector3(
@@ -885,15 +1032,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.y * 1.1f,
             erTransform.localScale.z
         );
+        */
         //振動
         if (vib>0)
         {
-            vib -= 0.01f;
+            vib -= 0.0003f;
         }
         else
         {
-            vib += 0.01f;
+            vib += 0.0003f;
         }
+        /*
         Transform elTransform = EyeL.transform;
         //大きさ
         elTransform.localScale = new Vector3(
@@ -901,12 +1050,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             elTransform.localScale.y * 1.1f,
             elTransform.localScale.z
         );
+        */
         //振動
 
     }
     void EyeBallMinus()
     {
-
+        /*
         Transform erTransform = EyeR.transform;
         //大きさ
         erTransform.localScale = new Vector3(
@@ -914,15 +1064,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.y / 1.1f,
             erTransform.localScale.z
         );
+        */
         //振動
         if (vib > 0)
         {
-            vib += 0.01f;
+            vib += 0.0003f;
         }
         else
         {
-            vib -= 0.01f;
+            vib -= 0.0003f;
         }
+        /*
     Transform elTransform = EyeL.transform;
         //大きさ
         elTransform.localScale = new Vector3(
@@ -930,6 +1082,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             elTransform.localScale.y / 1.1f,
             elTransform.localScale.z
         );
+        */
         //振動
 
     }
@@ -1035,8 +1188,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (Emotion < 20 && Emotion > 0)
         {
+            h--;
+            he -= 0.001f;
             Emotion++;
-            
             UwamabutaPlus();
             SitamabutaPlus();
             EyeBallPlus();
@@ -1053,7 +1207,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (Emotion < 20 && Emotion > 0)
         {
-
+            h++;
+            he += 0.001f;
             Emotion--;
             UwamabutaMinus();
             SitamabutaMinus();
@@ -1143,6 +1298,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
          Transform nlTransform = NamidaL.transform;
         //大きさ
         nlTransform.localScale = startSize;
+        kutisitaMeshRenderer.SetBlendShapeWeight(0, 0);
+        kutiueMeshRenderer.SetBlendShapeWeight(0, 0);
+        leftmayuMeshRenderer.SetBlendShapeWeight(0, 0);
+        leftnamidaMeshRenderer.SetBlendShapeWeight(0, 0);
+        lefteyesitaMeshRenderer.SetBlendShapeWeight(0, 0);
+        lefteyeueMeshRenderer.SetBlendShapeWeight(0, 0);
+        rightmayuMeshRenderer.SetBlendShapeWeight(0, 0);
+        rightnamidaMeshRenderer.SetBlendShapeWeight(0, 0);
+        righteyesitaMeshRenderer.SetBlendShapeWeight(0, 0);
+        righteyeueMeshRenderer.SetBlendShapeWeight(0, 0);
+        w = 0;
+        h = 0;
+        j = 1;
+        we = 1f;
+        he = 0;
     }
     /*void ChangeHand()
     {
@@ -1259,6 +1429,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     void QEyePlus()
     {
+        /*
         Transform erTransform = QEyeR.transform;
         //大きさ
         erTransform.localScale = new Vector3(
@@ -1266,15 +1437,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.y * 1.1f,
             erTransform.localScale.z
         );
+        */
         //振動
         if (qvib < 0)
         {
-            qvib += 0.01f;
+            qvib += 0.0003f;
         }
         else
         {
-            qvib -= 0.01f;
+            qvib -= 0.0003f;
         }
+        /*
         Transform elTransform = QEyeL.transform;
         //大きさ
         elTransform.localScale = new Vector3(
@@ -1282,10 +1455,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             elTransform.localScale.y * 1.1f,
             elTransform.localScale.z
         );
+        */
         //振動
     }
     void QEyeMinus()
     {
+        /*
         Transform erTransform = QEyeR.transform;
         //大きさ
         erTransform.localScale = new Vector3(
@@ -1293,15 +1468,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             erTransform.localScale.y / 1.1f,
             erTransform.localScale.z
         );
+        */
         //振動
         if (qvib >= 0)
         {
-            qvib += 0.01f;
+            qvib += 0.0001f;
         }
         else
         {
-            qvib -= 0.01f;
+            qvib -= 0.0001f;
         }
+        /*
         Transform elTransform = QEyeL.transform;
         //大きさ
         elTransform.localScale = new Vector3(
@@ -1309,6 +1486,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             elTransform.localScale.y / 1.1f,
             elTransform.localScale.z
         );
+        */
         //振動
     }
     void QNamidaPlus()
@@ -1513,13 +1691,31 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Transform nlTransform = QNamidaL.transform;
         //大きさ
         nlTransform.localScale = startSize;
+
+        kutisitaMeshRenderer.SetBlendShapeWeight(0, 0);
+        kutiueMeshRenderer.SetBlendShapeWeight(0, 0);
+        leftmayuMeshRenderer.SetBlendShapeWeight(0, 0);
+        leftnamidaMeshRenderer.SetBlendShapeWeight(0, 0);
+        lefteyesitaMeshRenderer.SetBlendShapeWeight(0, 0);
+        lefteyeueMeshRenderer.SetBlendShapeWeight(0, 0);
+        rightmayuMeshRenderer.SetBlendShapeWeight(0, 0);
+        rightnamidaMeshRenderer.SetBlendShapeWeight(0, 0);
+        righteyesitaMeshRenderer.SetBlendShapeWeight(0, 0);
+        righteyeueMeshRenderer.SetBlendShapeWeight(0, 0);
     }
-    
+    /*
     void EmotionMinusA()
     {
 
-        kutisitaMeshRenderer.SetBlendShapeWeight(1, 100);
-        kutisitaMeshRenderer.SetBlendShapeWeight(0, 100);
+        //kutisitaMeshRenderer.SetBlendShapeWeight(1, 100);
+        //kutisitaMeshRenderer.SetBlendShapeWeight(0, 100);
+        StartCoroutine(EmotionMinusCoroutine());
 
     }
+
+　　private IEnumerator EmotionMinusCoroutine()
+    {
+        yield return null;
+    }
+    */
 }
