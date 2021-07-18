@@ -238,6 +238,29 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 EnemyDeck.transform.position = new Vector3(350, 1600, 0);
             }
 
+            if (MyNumber == 1) //プレイヤー１モナリザ
+            {
+                if (isPlayerTurn) //攻撃
+                {
+                    ChangePlaceToPlayerTurnA();
+                }
+                else //守備
+                {
+                    ChangePlaceToEnemyTurnA();
+                }
+            }
+            else if(MyNumber == 2) //プレイヤー２ムンク
+            {
+                if (isPlayerTurn) //攻撃
+                {
+                    ChangePlaceToPlayerTurnB();
+                }
+                else //守備
+                {
+                    ChangePlaceToEnemyTurnB();
+                }
+            }
+
             
 
         }
