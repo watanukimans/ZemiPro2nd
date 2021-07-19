@@ -34,6 +34,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public int t9;
     public Image UIobj;
     public float countTime = 5.0f;
+    public float countDownReset=15f;
 
 
     //funamon変数
@@ -658,7 +659,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         SetHand();
         turn++;
         Debug.Log(turn);
-        countDown = 5.0f;
+        countDown = countDownReset;
         Debug.Log("Playerのターン");
     }
 
@@ -673,7 +674,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         SetHand();
         turn++;
         Debug.Log(turn);
-        countDown = 5.0f;
+        countDown = countDownReset;
         Debug.Log("Enemyのターン");
     }
     void Shuffle()
@@ -1262,7 +1263,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (Emotion < 20 && Emotion > 0)
         {
-            h-=blendhenka;
+            if (h > blendhenka)
+            {
+                h -= blendhenka;
+            }
             he -= eyesizehenka;
             Emotion++;
             //UwamabutaPlus();

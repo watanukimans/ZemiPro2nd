@@ -37,6 +37,8 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
     public Sprite neight;
     public Sprite nnine;
 
+    public float reset;
+
     public int selectCard;
 
     private void Update()
@@ -54,6 +56,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
 
     public void SelectClick()
     {
+        reset=GameManager.Instance.countDownReset; 
         //Debug.Log(GameManager.Instance.selectedcard + "が選ばれているよ");
         /*
         Transform myTransform = this.transform;
@@ -77,7 +80,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             GameObject[] Card1 = GameObject.FindGameObjectsWithTag("Card1");
             foreach (GameObject card1 in Card1)
                 GameObject.Destroy(card1, 1.0f);
-            GameManager.Instance.countDown = 5.0f;
+            GameManager.Instance.countDown = reset;
             //お試し
             ReDeck(1);
             Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
@@ -96,7 +99,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             GameObject[] Card2 = GameObject.FindGameObjectsWithTag("Card2");
             foreach (GameObject card2 in Card2)
                 GameObject.Destroy(card2, 1.0f);
-            GameManager.Instance.countDown = 5.0f;
+            GameManager.Instance.countDown = reset;
             ReDeck(2);
             Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
             GameManager.Instance.selectedcard = 0;
@@ -114,7 +117,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             GameObject[] Card3 = GameObject.FindGameObjectsWithTag("Card3");
             foreach (GameObject card3 in Card3)
                 GameObject.Destroy(card3, 1.0f);
-            GameManager.Instance.countDown = 5.0f;
+            GameManager.Instance.countDown = reset;
             ReDeck(3);
             Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
             GameManager.Instance.selectedcard = 0;
@@ -132,7 +135,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             GameObject[] Card4 = GameObject.FindGameObjectsWithTag("Card4");
             foreach (GameObject card4 in Card4)
                 GameObject.Destroy(card4, 1.0f);
-            GameManager.Instance.countDown = 5.0f;
+            GameManager.Instance.countDown = reset;
             ReDeck(4);
             Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
             GameManager.Instance.selectedcard = 0;
@@ -150,7 +153,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             GameObject[] Card5 = GameObject.FindGameObjectsWithTag("Card5");
             foreach (GameObject card5 in Card5)
                 GameObject.Destroy(card5, 1.0f);
-            GameManager.Instance.countDown = 5.0f;
+            GameManager.Instance.countDown = reset;
             ReDeck(5);
             Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
             GameManager.Instance.selectedcard = 0;
@@ -168,7 +171,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             GameObject[] Card6 = GameObject.FindGameObjectsWithTag("Card6");
             foreach (GameObject card6 in Card6)
                 GameObject.Destroy(card6, 1.0f);
-            GameManager.Instance.countDown = 5.0f;
+            GameManager.Instance.countDown = reset;
             ReDeck(6);
             Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
             GameManager.Instance.selectedcard = 0;
@@ -186,7 +189,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             GameObject[] Card7 = GameObject.FindGameObjectsWithTag("Card7");
             foreach (GameObject card7 in Card7)
                 GameObject.Destroy(card7, 1.0f);
-            GameManager.Instance.countDown = 5.0f;
+            GameManager.Instance.countDown = reset;
             ReDeck(7);
             Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
             GameManager.Instance.selectedcard = 0;
@@ -204,7 +207,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             GameObject[] Card8 = GameObject.FindGameObjectsWithTag("Card8");
             foreach (GameObject card8 in Card8)
                 GameObject.Destroy(card8, 1.0f);
-            GameManager.Instance.countDown = 5.0f;
+            GameManager.Instance.countDown = reset;
             ReDeck(8);
             Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
             GameManager.Instance.selectedcard = 0;
@@ -222,7 +225,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             GameObject[] Card9 = GameObject.FindGameObjectsWithTag("Card9");
             foreach (GameObject card9 in Card9)
                 GameObject.Destroy(card9, 1.0f);
-            GameManager.Instance.countDown = 5.0f;
+            GameManager.Instance.countDown = reset;
             ReDeck(9);
             Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
             GameManager.Instance.selectedcard = 0;
@@ -239,7 +242,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
             GameObject[] Card10 = GameObject.FindGameObjectsWithTag("Card10");
             foreach (GameObject card10 in Card10)
                 GameObject.Destroy(card10, 1.0f);
-            GameManager.Instance.countDown = 5.0f;
+            GameManager.Instance.countDown = reset;
             //GameManager.Instance.ChangeTurn();
             //GMChangeTurn();
             GameManager.Instance.selectedcard = 0;
@@ -252,7 +255,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
         if (GameManager.Instance.isPlayerTurn)
         {
             //Debug.Log(eventData);
-
+            reset = GameManager.Instance.countDownReset;
             //Y座標を移動
             Transform myTransform = this.transform;
             //Vector3 pos = myTransform.localPosition;
@@ -268,7 +271,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
                 GameObject[] Card1 = GameObject.FindGameObjectsWithTag("Card1");
                 foreach (GameObject card1 in Card1)
                     GameObject.Destroy(card1, 1.0f);
-                GameManager.Instance.countDown = 5.0f;
+                GameManager.Instance.countDown = reset;
                 //お試し
                 ReDeck(1);
                 Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
@@ -282,7 +285,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
                 GameObject[] Card2 = GameObject.FindGameObjectsWithTag("Card2");
                 foreach (GameObject card2 in Card2)
                     GameObject.Destroy(card2, 1.0f);
-                GameManager.Instance.countDown = 5.0f;
+                GameManager.Instance.countDown = reset;
                 ReDeck(2);
                 Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
                 selectCard = 2;
@@ -295,7 +298,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
                 GameObject[] Card3 = GameObject.FindGameObjectsWithTag("Card3");
                 foreach (GameObject card3 in Card3)
                     GameObject.Destroy(card3, 1.0f);
-                GameManager.Instance.countDown = 5.0f;
+                GameManager.Instance.countDown = reset;
                 ReDeck(3);
                 Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
                 selectCard = 3;
@@ -308,7 +311,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
                 GameObject[] Card4 = GameObject.FindGameObjectsWithTag("Card4");
                 foreach (GameObject card4 in Card4)
                     GameObject.Destroy(card4, 1.0f);
-                GameManager.Instance.countDown = 5.0f;
+                GameManager.Instance.countDown = reset;
                 ReDeck(4);
                 Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
                 selectCard = 4;
@@ -321,7 +324,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
                 GameObject[] Card5 = GameObject.FindGameObjectsWithTag("Card5");
                 foreach (GameObject card5 in Card5)
                     GameObject.Destroy(card5, 1.0f);
-                GameManager.Instance.countDown = 5.0f;
+                GameManager.Instance.countDown = reset;
                 ReDeck(5);
                 Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
                 selectCard = 5;
@@ -334,7 +337,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
                 GameObject[] Card6 = GameObject.FindGameObjectsWithTag("Card6");
                 foreach (GameObject card6 in Card6)
                     GameObject.Destroy(card6, 1.0f);
-                GameManager.Instance.countDown = 5.0f;
+                GameManager.Instance.countDown = reset;
                 ReDeck(6);
                 Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
                 selectCard = 6;
@@ -347,7 +350,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
                 GameObject[] Card7 = GameObject.FindGameObjectsWithTag("Card7");
                 foreach (GameObject card7 in Card7)
                     GameObject.Destroy(card7, 1.0f);
-                GameManager.Instance.countDown = 5.0f;
+                GameManager.Instance.countDown = reset;
                 ReDeck(7);
                 Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
                 selectCard = 7;
@@ -360,7 +363,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
                 GameObject[] Card8 = GameObject.FindGameObjectsWithTag("Card8");
                 foreach (GameObject card8 in Card8)
                     GameObject.Destroy(card8, 1.0f);
-                GameManager.Instance.countDown = 5.0f;
+                GameManager.Instance.countDown =reset;
                 ReDeck(8);
                 Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
                 selectCard = 8;
@@ -373,7 +376,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
                 GameObject[] Card9 = GameObject.FindGameObjectsWithTag("Card9");
                 foreach (GameObject card9 in Card9)
                     GameObject.Destroy(card9, 1.0f);
-                GameManager.Instance.countDown = 5.0f;
+                GameManager.Instance.countDown = reset;
                 ReDeck(9);
                 Debug.Log("1ターン目に消されたのは" + GameManager.Instance.t1);
                 selectCard = 9;
@@ -385,7 +388,7 @@ public class OnClickS : MonoBehaviour, IPointerClickHandler
                 GameObject[] Card10 = GameObject.FindGameObjectsWithTag("Card10");
                 foreach (GameObject card10 in Card10)
                     GameObject.Destroy(card10, 1.0f);
-                GameManager.Instance.countDown = 5.0f;
+                GameManager.Instance.countDown = reset;
                 //GameManager.Instance.ChangeTurn();
                 //GMChangeTurn();
                 selectCard = 10;

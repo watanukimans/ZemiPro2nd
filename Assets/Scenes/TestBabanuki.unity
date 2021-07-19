@@ -5578,11 +5578,11 @@ MonoBehaviour:
     type: 3}
   playerHand: {fileID: 258579851}
   EnemyHand: {fileID: 307920267}
-  blendhenka: 1
+  blendhenka: 0.2
   eyesizehenka: 0.0003
   isPlayerTurn: 1
   cardEntity: {fileID: 11400000, guid: 9b79bf955e51cc94192cb5f927feb599, type: 2}
-  countDown: 5
+  countDown: 15
   turn: 0
   decknum: 0
   dCard: 0
@@ -5596,7 +5596,8 @@ MonoBehaviour:
   t8: 0
   t9: 0
   UIobj: {fileID: 1994433226}
-  countTime: 5
+  countTime: 15
+  countDownReset: 15
   PlayerDeck: {fileID: 258579850}
   EnemyDeck: {fileID: 307920266}
   UwamabutaR: {fileID: 1931607949}
