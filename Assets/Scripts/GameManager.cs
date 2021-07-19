@@ -164,7 +164,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private AudioSource bgm;
     public AudioClip title;
-    public AudioClip play; 
+    public AudioClip play;
 
     /*
     public bool drowed;
@@ -175,6 +175,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     */
 
     //public bool P2go;
+
+    //濱田追記　SE用
+    public AudioClip Alarm;
+    AudioSource audioSource;
+    [SerializeField] private AudioSource SE;
+    bool isOnce=false;
 
     void Start()
     {
@@ -237,6 +243,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //deckcount2 = 0;
 
         //P2go = false;
+        audioSource = SE;
     }
 
     public void GameStart() //スタートボタン押下時に作動する関数
@@ -282,9 +289,25 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 {
                     countDown -= Time.deltaTime;
                     UIobj.fillAmount -= 1.0f / countTime * Time.deltaTime;
+                    
+                    //SE
+                    if(countDown<=2)
+                    {
+                        if (isOnce)
+                        {
+
+                        }
+                        else
+                        {
+                            SE.PlayOneShot(Alarm);
+                            isOnce = true;
+                        }
+                    }
                 }
                 else if (countDown < 0)
                 {
+                    isOnce = false;
+                  SE.Stop();
                     clicked = false;
                     GameObject[] Card10 = GameObject.FindGameObjectsWithTag("Card10");
                     foreach (GameObject card10 in Card10)
