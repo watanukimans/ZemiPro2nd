@@ -2020,7 +2020,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -5699,8 +5699,6 @@ MonoBehaviour:
   LoginText: {fileID: 997003369}
   title: {fileID: 8300000, guid: c08470062881d4d00aaea4d60d25aa09, type: 3}
   play: {fileID: 8300000, guid: 5d8e3b7c46ec64f6f9d45f10f41bec57, type: 3}
-  Alarm: {fileID: 8300000, guid: 15776c2f5faab2d4698be9fc6cb76fc3, type: 3}
-  SE: {fileID: 2115009429}
 --- !u!4 &2115009427
 Transform:
   m_ObjectHideFlags: 0
@@ -6672,7 +6670,9 @@ SkinnedMeshRenderer:
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: -2104266207237776474, guid: a6004d8faa08cb840a6ad68c16d2c25c, type: 3}
   m_Bones: []
-  m_BlendShapeWeights: []
+  m_BlendShapeWeights:
+  - 0
+  - 0
   m_RootBone: {fileID: 0}
   m_AABB:
     m_Center: {x: -0.0002500224, y: 0, z: 0}
@@ -7418,8 +7418,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4667384588814989273}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 10.050049, y: -38.65, z: -4050}
-  m_LocalScale: {x: 5850, y: 0, z: 6749.9995}
+  m_LocalPosition: {x: 10.05011, y: -38.65, z: -4050}
+  m_LocalScale: {x: 5850.0024, y: 0, z: 6750.001}
   m_Children:
   - {fileID: 6963505035572778322}
   - {fileID: 661959458186428611}

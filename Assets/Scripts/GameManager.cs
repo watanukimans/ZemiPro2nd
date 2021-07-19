@@ -164,7 +164,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private AudioSource bgm;
     public AudioClip title;
-    public AudioClip play;
+    public AudioClip play; 
 
     /*
     public bool drowed;
@@ -175,12 +175,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     */
 
     //public bool P2go;
-
-    //濱田追記　SE用
-    public AudioClip Alarm;
-    AudioSource audioSource;
-    [SerializeField] private AudioSource SE;
-    bool isOnce=false;
 
     void Start()
     {
@@ -243,7 +237,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //deckcount2 = 0;
 
         //P2go = false;
-        audioSource = SE;
     }
 
     public void GameStart() //スタートボタン押下時に作動する関数
@@ -289,25 +282,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 {
                     countDown -= Time.deltaTime;
                     UIobj.fillAmount -= 1.0f / countTime * Time.deltaTime;
-                    
-                    //SE
-                    if(countDown<=2)
-                    {
-                        if (isOnce)
-                        {
-
-                        }
-                        else
-                        {
-                            SE.PlayOneShot(Alarm);
-                            isOnce = true;
-                        }
-                    }
                 }
                 else if (countDown < 0)
                 {
-                    isOnce = false;
-                  SE.Stop();
                     clicked = false;
                     GameObject[] Card10 = GameObject.FindGameObjectsWithTag("Card10");
                     foreach (GameObject card10 in Card10)
@@ -951,7 +928,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //スポットライトを消す
         spotLight.SetActive(false);
         RectTransform qTransform = MunkuBase.GetComponent<RectTransform>();
-        qTransform.anchoredPosition = new Vector3(0, -63, 0); 
+        qTransform.anchoredPosition = new Vector3(0, 1000, 0); 
         RectTransform mTransform = MonarizaBase.GetComponent<RectTransform>();
         mTransform.anchoredPosition = new Vector3(276, -162, 0);
         
@@ -1288,10 +1265,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             h-=blendhenka;
             he -= eyesizehenka;
             Emotion++;
-            UwamabutaPlus();
-            SitamabutaPlus();
+            //UwamabutaPlus();
+            //SitamabutaPlus();
             EyeBallPlus();
-            NamidaPlus();
+            //NamidaPlus();
             
         }
         else
@@ -1307,10 +1284,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             h+=blendhenka;
             he += eyesizehenka;
             Emotion--;
-            UwamabutaMinus();
-            SitamabutaMinus();
+            //UwamabutaMinus();
+            //SitamabutaMinus();
             EyeBallMinus();
-            NamidaMinus();
+            //NamidaMinus();
             //EmotionMinusA();
         }
         else
@@ -1683,12 +1660,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (QEmotion < 20 && QEmotion > 0)
         {
             QEmotion++;
-
+            /*
             QUwaMPlus();
             QSitaMPlus();
             QEyePlus();
             QNamidaPlus();
-
+            */
         }
         else
         {
@@ -1699,12 +1676,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (QEmotion < 20 && QEmotion > 0)
         {
-
+            /*
             QEmotion--;
             QUwaMMinus();
             QSitaMMinus();
             QEyeMinus();
             QNamidaMinus();
+            */
         }
         else
         {
