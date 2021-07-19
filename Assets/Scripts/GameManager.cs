@@ -1546,11 +1546,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         //振動
         if (qvib >= 0)
         {
-            qvib += 0.0001f;
+            qvib += 0.0003f;
         }
         else
         {
-            qvib -= 0.0001f;
+            qvib -= 0.0003f;
         }
         /*
         Transform elTransform = QEyeL.transform;
@@ -1660,10 +1660,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (QEmotion < 20 && QEmotion > 0)
         {
             QEmotion++;
+            QEyePlus();
             /*
             QUwaMPlus();
             QSitaMPlus();
-            QEyePlus();
+            
             QNamidaPlus();
             */
         }
@@ -1676,11 +1677,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (QEmotion < 20 && QEmotion > 0)
         {
-            /*
+            QEyeMinus();
+            
             QEmotion--;
+            /*
             QUwaMMinus();
             QSitaMMinus();
-            QEyeMinus();
+            
             QNamidaMinus();
             */
         }
