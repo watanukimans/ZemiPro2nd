@@ -11,6 +11,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] CardController cardPrefab;
     [SerializeField] Transform playerHand,EnemyHand;
 
+    public float blendhenka;
+    public float eyesizehenka;
+
     public bool isPlayerTurn = true; 
     List<int> deck = new List<int>() {};
     List<int> deck2 = new List<int>() {};
@@ -121,14 +124,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public GameObject mrightnamida;
     public GameObject mrighteyesita;
     public GameObject mrighteyeue;
-    public int h;//顔の変化量
+    public float h;//顔の変化量
     public float span = 0.1f;
     private float currentTime = 0f;
     public int j = 1;//顔の状態
-    public int w = 0;
+    public float w = 0f;
     public float he;//目の変化量
     public float we =1f;
     public Image cardnum;
+    
 
     //ゲームスタートに関する表示
     public GameObject StartButtun;
@@ -1258,8 +1262,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (Emotion < 20 && Emotion > 0)
         {
-            h--;
-            he -= 0.001f;
+            h-=blendhenka;
+            he -= eyesizehenka;
             Emotion++;
             UwamabutaPlus();
             SitamabutaPlus();
@@ -1277,8 +1281,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         if (Emotion < 20 && Emotion > 0)
         {
-            h++;
-            he += 0.001f;
+            h+=blendhenka;
+            he += eyesizehenka;
             Emotion--;
             UwamabutaMinus();
             SitamabutaMinus();

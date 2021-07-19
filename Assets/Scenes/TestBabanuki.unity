@@ -5577,6 +5577,8 @@ MonoBehaviour:
     type: 3}
   playerHand: {fileID: 258579851}
   EnemyHand: {fileID: 307920267}
+  blendhenka: 1
+  eyesizehenka: 0.0003
   isPlayerTurn: 1
   cardEntity: {fileID: 11400000, guid: 9b79bf955e51cc94192cb5f927feb599, type: 2}
   countDown: 5
