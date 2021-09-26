@@ -7,19 +7,16 @@ using UnityEngine;
 
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class ClickSmile : MonoBehaviour, IPointerClickHandler
+public class ClickSad : MonoBehaviour, IPointerClickHandler
 {
     // Start is called before the first frame update
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("スマイルください");
-        GameManager.Instance.w2 += 5;
-        /*
-        GameManager.Instance.EmotionPlus();
-        if (GameManager.Instance.w > 5)
+        Debug.Log("ノースマイルください");
+        if (GameManager.Instance.w <=100)
         {
-            GameManager.Instance.w -= 5;
+            GameManager.Instance.w += 5;
         }
-        */
+        
     }
 }

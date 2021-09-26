@@ -5582,7 +5582,7 @@ MonoBehaviour:
   eyesizehenka: 0.0003
   isPlayerTurn: 1
   cardEntity: {fileID: 11400000, guid: 9b79bf955e51cc94192cb5f927feb599, type: 2}
-  countDown: 15
+  countDown: 5
   turn: 0
   decknum: 0
   dCard: 0
@@ -5596,8 +5596,8 @@ MonoBehaviour:
   t8: 0
   t9: 0
   UIobj: {fileID: 1994433226}
-  countTime: 15
-  countDownReset: 15
+  countTime: 5
+  countDownReset: 5
   PlayerDeck: {fileID: 258579850}
   EnemyDeck: {fileID: 307920266}
   UwamabutaR: {fileID: 1931607949}
@@ -5678,6 +5678,7 @@ MonoBehaviour:
   span: 0.1
   j: 1
   w: 0
+  w2: 0
   he: 0
   we: 0
   cardnum: {fileID: 1870716582}

@@ -129,7 +129,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public float span = 0.1f;
     private float currentTime = 0f;
     public int j = 1;//顔の状態
-    public float w = 0f;
+    public float w = 0f;//ブレンドシェイプの値悲
+    public float w2 = 0f;//ブレンドシェイプの値笑
     public float he;//目の変化量
     public float we =1f;
     public Image cardnum;
@@ -393,6 +394,27 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     mrightnamidaMeshRenderer.SetBlendShapeWeight(0, w);
                     mrighteyesitaMeshRenderer.SetBlendShapeWeight(0, w);
                     mrighteyeueMeshRenderer.SetBlendShapeWeight(0, w);
+
+                    kutisitaMeshRenderer.SetBlendShapeWeight(1, w2);
+                    kutiueMeshRenderer.SetBlendShapeWeight(1, w2);
+                    leftmayuMeshRenderer.SetBlendShapeWeight(1, w2);
+                    leftnamidaMeshRenderer.SetBlendShapeWeight(1, w2);
+                    lefteyesitaMeshRenderer.SetBlendShapeWeight(1, w2);
+                    lefteyeueMeshRenderer.SetBlendShapeWeight(1, w2);
+                    rightmayuMeshRenderer.SetBlendShapeWeight(1, w2);
+                    rightnamidaMeshRenderer.SetBlendShapeWeight(1, w2);
+                    righteyesitaMeshRenderer.SetBlendShapeWeight(1, w2);
+                    righteyeueMeshRenderer.SetBlendShapeWeight(1, w2);
+                    mkutisitaMeshRenderer.SetBlendShapeWeight(1, w2);
+                    mkutiueMeshRenderer.SetBlendShapeWeight(1, w2);
+                    mleftmayuMeshRenderer.SetBlendShapeWeight(1, w2);
+                    mleftnamidaMeshRenderer.SetBlendShapeWeight(1, w2);
+                    mlefteyesitaMeshRenderer.SetBlendShapeWeight(1, w2);
+                    mlefteyeueMeshRenderer.SetBlendShapeWeight(1, w2);
+                    mrightmayuMeshRenderer.SetBlendShapeWeight(1, w2);
+                    mrightnamidaMeshRenderer.SetBlendShapeWeight(1, w2);
+                    mrighteyesitaMeshRenderer.SetBlendShapeWeight(1, w2);
+                    mrighteyeueMeshRenderer.SetBlendShapeWeight(1, w2);
 
                 }
                 //funamon
@@ -986,128 +1008,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     
 
     //顔関連
-    void UwamabutaMinus()
-    {
-        //右上瞼
-        Transform umrTransform = UwamabutaR.transform;
-        //位置
-        Vector3 posr = umrTransform.localPosition;
-        posr.y += 0.1f;
-        umrTransform.localPosition = posr;
-        //しなり
-        //角度
-        Vector3 localAngleR = umrTransform.localEulerAngles;
-        localAngleR.z -= 5f;
-        umrTransform.localEulerAngles = localAngleR;
-
-        //左上瞼
-        Transform umlTransform = UwamabutaL.transform;
-        //位置
-        Vector3 posl = umlTransform.localPosition;
-        posl.y += 0.1f;
-        umlTransform.localPosition = posl;
-        //しなり
-        //角度
-        Vector3 localAngleL = umlTransform.localEulerAngles;
-        localAngleL.z += 5f;
-        umlTransform.localEulerAngles = localAngleL;
-    }
-    
-    void UwamabutaPlus()
-    {
-
-        //右上瞼
-        //位置
-        Transform umrTransform = UwamabutaR.transform;
-        Vector3 posr = umrTransform.localPosition;
-        posr.y -= 0.1f;
-        umrTransform.localPosition = posr;
-        //しなり
-        //角度
-        Vector3 localAngleR = umrTransform.localEulerAngles;
-        localAngleR.z += 5f;
-        umrTransform.localEulerAngles = localAngleR;
-        //左上瞼
-        //位置
-        Transform umlTransform = UwamabutaL.transform;
-        Vector3 posl = umlTransform.localPosition;
-        posl.y -= 0.1f;
-        umlTransform.localPosition = posl;
-        //しなり
-        //角度
-        Vector3 localAngleL = umlTransform.localEulerAngles;
-        localAngleL.z -= 5f;
-        umlTransform.localEulerAngles = localAngleL;
-
-    }
-    void SitamabutaMinus()
-    {
-
-        //右下瞼
-        //位置
-        Transform smrTransform = SitamabutaR.transform;
-        Vector3 posr = smrTransform.localPosition;
-        posr.y += 0.1f;
-        smrTransform.localPosition = posr;
-        //しなり
-        //角度
-        Vector3 localAngleR = smrTransform.localEulerAngles;
-        localAngleR.z -= 5f;
-        smrTransform.localEulerAngles = localAngleR;
-
-        //左下瞼
-        //位置
-        Transform smlTransform = SitamabutaL.transform;
-        Vector3 posl = smlTransform.localPosition;
-        posl.y += 0.1f;
-        smlTransform.localPosition = posl;
-        //しなり
-        //角度
-        Vector3 localAngleL = smlTransform.localEulerAngles;
-        localAngleL.z += 5f;
-        smlTransform.localEulerAngles = localAngleL;
-
-
-    }
-    void SitamabutaPlus()
-    {
-
-        //右下瞼
-        //位置
-        Transform smrTransform = SitamabutaR.transform;
-        Vector3 posr = smrTransform.localPosition;
-        posr.y -= 0.1f;
-        smrTransform.localPosition = posr;
-        //しなり
-        //角度
-        Vector3 localAngleR = smrTransform.localEulerAngles;
-        localAngleR.z += 5f;
-        smrTransform.localEulerAngles = localAngleR;
-
-        //左下瞼
-        //位置
-        Transform smlTransform = SitamabutaL.transform;
-        Vector3 posl = smlTransform.localPosition;
-        posl.y -= 0.1f;
-        smlTransform.localPosition = posl;
-        //しなり
-        //角度
-        Vector3 localAngleL = smlTransform.localEulerAngles;
-        localAngleL.z -= 5f;
-        smlTransform.localEulerAngles = localAngleL;
-
-    }
     void EyeBallPlus()
     {
-        /*
-        Transform erTransform = EyeR.transform;
-        //大きさ
-        erTransform.localScale = new Vector3(
-            erTransform.localScale.x * 1.1f,
-            erTransform.localScale.y * 1.1f,
-            erTransform.localScale.z
-        );
-        */
         //振動
         if (vib>0)
         {
@@ -1117,29 +1019,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             vib += 0.0003f;
         }
-        /*
-        Transform elTransform = EyeL.transform;
-        //大きさ
-        elTransform.localScale = new Vector3(
-            elTransform.localScale.x * 1.1f,
-            elTransform.localScale.y * 1.1f,
-            elTransform.localScale.z
-        );
-        */
-        //振動
-
     }
     void EyeBallMinus()
     {
-        /*
-        Transform erTransform = EyeR.transform;
-        //大きさ
-        erTransform.localScale = new Vector3(
-            erTransform.localScale.x / 1.1f,
-            erTransform.localScale.y / 1.1f,
-            erTransform.localScale.z
-        );
-        */
         //振動
         if (vib > 0)
         {
@@ -1149,115 +1031,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             vib -= 0.0003f;
         }
-        /*
-    Transform elTransform = EyeL.transform;
-        //大きさ
-        elTransform.localScale = new Vector3(
-            elTransform.localScale.x / 1.1f,
-            elTransform.localScale.y / 1.1f,
-            elTransform.localScale.z
-        );
-        */
-        //振動
-
-    }
-    void NamidaPlus()
-    {
-        if (Emotion == 10)
-        {
-            NamidaR.SetActive(false);
-            NamidaL.SetActive(false);
-        }
-        else
-        {
-            NamidaR.SetActive(true);
-            NamidaL.SetActive(true);
-        }
-        Transform nrTransform = NamidaR.transform;
-        //大きさ
-        nrTransform.localScale = new Vector3(
-            nrTransform.localScale.x / 1.1f,
-            nrTransform.localScale.y / 1.1f,
-            nrTransform.localScale.z
-       );
-
-    Transform nlTransform = NamidaL.transform;
-        //大きさ
-        nlTransform.localScale = new Vector3(
-            nlTransform.localScale.x / 1.1f,
-            nlTransform.localScale.y / 1.1f,
-            nlTransform.localScale.z
-       );
-    }
-    void NamidaMinus()
-    {
-        if (Emotion == 10)
-        {
-            NamidaR.SetActive(false);
-            NamidaL.SetActive(false);
-        }
-        else
-        {
-            NamidaR.SetActive(true);
-            NamidaL.SetActive(true);
-        }
-        Transform nrTransform = NamidaR.transform;
-        //大きさ
-        nrTransform.localScale = new Vector3(
-            nrTransform.localScale.x * 1.1f,
-            nrTransform.localScale.y * 1.1f,
-            nrTransform.localScale.z
-       );
-
-    Transform nlTransform = NamidaL.transform;
-        //大きさ
-        nlTransform.localScale = new Vector3(
-            nlTransform.localScale.x * 1.1f,
-            nlTransform.localScale.y * 1.1f,
-            nlTransform.localScale.z
-       );
-
-    }
-    void MayuPlus()
-    {
-        //右眉
-        Transform mrTransform = MayuR.transform;
-        //角度
-        Vector3 localAngleR = mrTransform.localEulerAngles;
-        localAngleR.z += 5f;
-        mrTransform.localEulerAngles = localAngleR;
-        //しなり
-
-        //左眉
-        Transform mlTransform = MayuL.transform;
-        //角度
-        Vector3 localAngleL = mlTransform.localEulerAngles;
-        localAngleL.z -= 5f;
-        mlTransform.localEulerAngles = localAngleL;
-        //しなり
-    }
-    void MayuMinus()
-    {
-        //右眉
-        Transform mrTransform = MayuR.transform;
-        //角度
-        Vector3 localAngleR = mrTransform.localEulerAngles;
-        localAngleR.z -= 5f;
-        mrTransform.localEulerAngles = localAngleR;
-        //しなり
-
-        //左眉
-        Transform mlTransform = MayuL.transform;
-        //角度
-        Vector3 localAngleL = mlTransform.localEulerAngles;
-        localAngleL.z += 5f;
-        mlTransform.localEulerAngles = localAngleL;
-        //しなり
-    }
-    void Mouth()
-    {
-        //しなり
-        //開き具合
     }
     public void EmotionPlus()
     {
@@ -1269,11 +1042,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
             he -= eyesizehenka;
             Emotion++;
-            //UwamabutaPlus();
-            //SitamabutaPlus();
-            EyeBallPlus();
-            //NamidaPlus();
-            
+            EyeBallPlus(); 
         }
         else
         {
@@ -1288,11 +1057,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             h+=blendhenka;
             he += eyesizehenka;
             Emotion--;
-            //UwamabutaMinus();
-            //SitamabutaMinus();
             EyeBallMinus();
-            //NamidaMinus();
-            //EmotionMinusA();
         }
         else
         {
@@ -1302,54 +1067,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void ResetFace()
     {
         startSize = new Vector3(1f, 1f, 1f);
-        //右上瞼
-        Transform umrTransform = UwamabutaR.transform;
-        //位置
-        Vector3 posr = umrTransform.localPosition;
-        posr.y = 56.7f;
-        umrTransform.localPosition = posr;
-        //しなり
-        //角度
-        Vector3 localAngleR = umrTransform.localEulerAngles;
-        localAngleR.z = 0f;
-        umrTransform.localEulerAngles = localAngleR;
-
-        //左上瞼
-        Transform umlTransform = UwamabutaL.transform;
-        //位置
-        Vector3 posl = umlTransform.localPosition;
-        posl.y = 56.7f;
-        umlTransform.localPosition = posl;
-        //しなり
-        //角度
-        Vector3 localAngleL = umlTransform.localEulerAngles;
-        localAngleL.z = 0f;
-        umlTransform.localEulerAngles = localAngleL;
-
-        //右下瞼
-        //位置
-        Transform smrTransform = SitamabutaR.transform;
-        Vector3 possmr = smrTransform.localPosition;
-        possmr.y = 56.7f;
-        smrTransform.localPosition = possmr;
-        //しなり
-        //角度
-        Vector3 localAnglesmR = smrTransform.localEulerAngles;
-        localAnglesmR.z = 0f;
-        smrTransform.localEulerAngles = localAnglesmR;
-
-        //左下瞼
-        //位置
-        Transform smlTransform = SitamabutaL.transform;
-        Vector3 possml = smlTransform.localPosition;
-        possml.y = 56.7f;
-        smlTransform.localPosition = possml;
-        //しなり
-        //角度
-        Vector3 localAnglesmL = smlTransform.localEulerAngles;
-        localAnglesmL.z = 0f;
-        smlTransform.localEulerAngles = localAnglesmL;
-
         //右目
         Transform erTransform = EyeR.transform;
         //大きさ
@@ -1376,17 +1093,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
          Transform nlTransform = NamidaL.transform;
         //大きさ
         nlTransform.localScale = startSize;
-        kutisitaMeshRenderer.SetBlendShapeWeight(0, 0);
-        kutiueMeshRenderer.SetBlendShapeWeight(0, 0);
-        leftmayuMeshRenderer.SetBlendShapeWeight(0, 0);
-        leftnamidaMeshRenderer.SetBlendShapeWeight(0, 0);
-        lefteyesitaMeshRenderer.SetBlendShapeWeight(0, 0);
-        lefteyeueMeshRenderer.SetBlendShapeWeight(0, 0);
-        rightmayuMeshRenderer.SetBlendShapeWeight(0, 0);
-        rightnamidaMeshRenderer.SetBlendShapeWeight(0, 0);
-        righteyesitaMeshRenderer.SetBlendShapeWeight(0, 0);
-        righteyeueMeshRenderer.SetBlendShapeWeight(0, 0);
         w = 0;
+        w2 = 0;
         h = 0;
         j = 1;
         we = 1f;
@@ -1401,121 +1109,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     */
     //ここからムンク
-    void QUwaMMinus()
-    {
-        //右上瞼
-        Transform umrTransform = QUwaMR.transform;
-        //位置
-        Vector3 posr = umrTransform.localPosition;
-        posr.y += 0.1f;
-        umrTransform.localPosition = posr;
-        //しなり
-        //角度
-        Vector3 localAngleR = umrTransform.localEulerAngles;
-        localAngleR.z -= 5f;
-        umrTransform.localEulerAngles = localAngleR;
-
-        //左上瞼
-        Transform umlTransform = QUwaML.transform;
-        //位置
-        Vector3 posl = umlTransform.localPosition;
-        posl.y += 0.1f;
-        umlTransform.localPosition = posl;
-        //しなり
-        //角度
-        Vector3 localAngleL = umlTransform.localEulerAngles;
-        localAngleL.z += 5f;
-        umlTransform.localEulerAngles = localAngleL;
-    }
-    void QUwaMPlus()
-    {
-        //右上瞼
-        //位置
-        Transform umrTransform = QUwaMR.transform;
-        Vector3 posr = umrTransform.localPosition;
-        posr.y -= 0.1f;
-        umrTransform.localPosition = posr;
-        //しなり
-        //角度
-        Vector3 localAngleR = umrTransform.localEulerAngles;
-        localAngleR.z += 5f;
-        umrTransform.localEulerAngles = localAngleR;
-        //左上瞼
-        //位置
-        Transform umlTransform = QUwaML.transform;
-        Vector3 posl = umlTransform.localPosition;
-        posl.y -= 0.1f;
-        umlTransform.localPosition = posl;
-        //しなり
-        //角度
-        Vector3 localAngleL = umlTransform.localEulerAngles;
-        localAngleL.z -= 5f;
-        umlTransform.localEulerAngles = localAngleL;
-    }
-    void QSitaMMinus()
-    {
-        //右下瞼
-        //位置
-        Transform smrTransform = QSitaMR.transform;
-        Vector3 posr = smrTransform.localPosition;
-        posr.y += 0.1f;
-        smrTransform.localPosition = posr;
-        //しなり
-        //角度
-        Vector3 localAngleR = smrTransform.localEulerAngles;
-        localAngleR.z -= 5f;
-        smrTransform.localEulerAngles = localAngleR;
-
-        //左下瞼
-        //位置
-        Transform smlTransform = QSitaML.transform;
-        Vector3 posl = smlTransform.localPosition;
-        posl.y += 0.1f;
-        smlTransform.localPosition = posl;
-        //しなり
-        //角度
-        Vector3 localAngleL = smlTransform.localEulerAngles;
-        localAngleL.z += 5f;
-        smlTransform.localEulerAngles = localAngleL;
-    }
-    void QSitaMPlus()
-    {
-        //右下瞼
-        //位置
-        Transform smrTransform = QSitaMR.transform;
-        Vector3 posr = smrTransform.localPosition;
-        posr.y -= 0.1f;
-        smrTransform.localPosition = posr;
-        //しなり
-        //角度
-        Vector3 localAngleR = smrTransform.localEulerAngles;
-        localAngleR.z += 5f;
-        smrTransform.localEulerAngles = localAngleR;
-
-        //左下瞼
-        //位置
-        Transform smlTransform = QSitaML.transform;
-        Vector3 posl = smlTransform.localPosition;
-        posl.y -= 0.1f;
-        smlTransform.localPosition = posl;
-        //しなり
-        //角度
-        Vector3 localAngleL = smlTransform.localEulerAngles;
-        localAngleL.z -= 5f;
-        smlTransform.localEulerAngles = localAngleL;
-    }
-
     void QEyePlus()
     {
-        /*
-        Transform erTransform = QEyeR.transform;
-        //大きさ
-        erTransform.localScale = new Vector3(
-            erTransform.localScale.x * 1.1f,
-            erTransform.localScale.y * 1.1f,
-            erTransform.localScale.z
-        );
-        */
         //振動
         if (qvib < 0)
         {
@@ -1525,28 +1120,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             qvib -= 0.0003f;
         }
-        /*
-        Transform elTransform = QEyeL.transform;
-        //大きさ
-        elTransform.localScale = new Vector3(
-            elTransform.localScale.x * 1.1f,
-            elTransform.localScale.y * 1.1f,
-            elTransform.localScale.z
-        );
-        */
-        //振動
     }
     void QEyeMinus()
     {
-        /*
-        Transform erTransform = QEyeR.transform;
-        //大きさ
-        erTransform.localScale = new Vector3(
-            erTransform.localScale.x / 1.1f,
-            erTransform.localScale.y / 1.1f,
-            erTransform.localScale.z
-        );
-        */
         //振動
         if (qvib >= 0)
         {
@@ -1556,108 +1132,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             qvib -= 0.0003f;
         }
-        /*
-        Transform elTransform = QEyeL.transform;
-        //大きさ
-        elTransform.localScale = new Vector3(
-            elTransform.localScale.x / 1.1f,
-            elTransform.localScale.y / 1.1f,
-            elTransform.localScale.z
-        );
-        */
-        //振動
-    }
-    void QNamidaPlus()
-    {
-        if (QEmotion==10)
-        {
-            QNamidaR.SetActive(false);
-            QNamidaL.SetActive(false);
-        }
-        else
-        {
-            QNamidaR.SetActive(true);
-            QNamidaL.SetActive(true);
-        }
-        Transform nrTransform = QNamidaR.transform;
-        //大きさ
-        nrTransform.localScale = new Vector3(
-            nrTransform.localScale.x / 1.1f,
-            nrTransform.localScale.y / 1.1f,
-            nrTransform.localScale.z
-       );
-
-        Transform nlTransform = QNamidaL.transform;
-        //大きさ
-        nlTransform.localScale = new Vector3(
-            nlTransform.localScale.x / 1.1f,
-            nlTransform.localScale.y / 1.1f,
-            nlTransform.localScale.z
-       );
-    }
-    void QNamidaMinus()
-    {
-        if (QEmotion == 10)
-        {
-            QNamidaR.SetActive(false);
-            QNamidaL.SetActive(false);
-        }
-        else
-        {
-            QNamidaR.SetActive(true);
-            QNamidaL.SetActive(true);
-        }
-        Transform nrTransform = QNamidaR.transform;
-        //大きさ
-        nrTransform.localScale = new Vector3(
-            nrTransform.localScale.x * 1.1f,
-            nrTransform.localScale.y * 1.1f,
-            nrTransform.localScale.z
-       );
-
-        Transform nlTransform = QNamidaL.transform;
-        //大きさ
-        nlTransform.localScale = new Vector3(
-            nlTransform.localScale.x * 1.1f,
-            nlTransform.localScale.y * 1.1f,
-            nlTransform.localScale.z
-       );
-    }
-    void QMayuPlus()
-    {
-        //右眉
-        Transform mrTransform = QMayuR.transform;
-        //角度
-        Vector3 localAngleR = mrTransform.localEulerAngles;
-        localAngleR.z += 5f;
-        mrTransform.localEulerAngles = localAngleR;
-        //しなり
-
-        //左眉
-        Transform mlTransform = QMayuL.transform;
-        //角度
-        Vector3 localAngleL = mlTransform.localEulerAngles;
-        localAngleL.z -= 5f;
-        mlTransform.localEulerAngles = localAngleL;
-        //しなり
-    }
-    void QMayuMinus()
-    {
-        //右眉
-        Transform mrTransform = QMayuR.transform;
-        //角度
-        Vector3 localAngleR = mrTransform.localEulerAngles;
-        localAngleR.z -= 5f;
-        mrTransform.localEulerAngles = localAngleR;
-        //しなり
-
-        //左眉
-        Transform mlTransform = QMayuL.transform;
-        //角度
-        Vector3 localAngleL = mlTransform.localEulerAngles;
-        localAngleL.z += 5f;
-        mlTransform.localEulerAngles = localAngleL;
-        //しなり
     }
     public void QEmotionPlus()
     {
@@ -1682,14 +1156,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (QEmotion < 20 && QEmotion > 0)
         {
             QEyeMinus();
-            
             QEmotion--;
-            /*
-            QUwaMMinus();
-            QSitaMMinus();
-            
-            QNamidaMinus();
-            */
         }
         else
         {
@@ -1699,54 +1166,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void QResetFace()
     {
         startSize = new Vector3(1f, 1f, 1f);
-        //右上瞼
-        Transform umrTransform = QUwaMR.transform;
-        //位置
-        Vector3 posr = umrTransform.localPosition;
-        posr.y = 56.7f;
-        umrTransform.localPosition = posr;
-        //しなり
-        //角度
-        Vector3 localAngleR = umrTransform.localEulerAngles;
-        localAngleR.z = 0f;
-        umrTransform.localEulerAngles = localAngleR;
-
-        //左上瞼
-        Transform umlTransform = QUwaML.transform;
-        //位置
-        Vector3 posl = umlTransform.localPosition;
-        posl.y = 56.7f;
-        umlTransform.localPosition = posl;
-        //しなり
-        //角度
-        Vector3 localAngleL = umlTransform.localEulerAngles;
-        localAngleL.z = 0f;
-        umlTransform.localEulerAngles = localAngleL;
-
-        //右下瞼
-        //位置
-        Transform smrTransform = QSitaMR.transform;
-        Vector3 possmr = smrTransform.localPosition;
-        possmr.y = 56.7f;
-        smrTransform.localPosition = possmr;
-        //しなり
-        //角度
-        Vector3 localAnglesmR = smrTransform.localEulerAngles;
-        localAnglesmR.z = 0f;
-        smrTransform.localEulerAngles = localAnglesmR;
-
-        //左下瞼
-        //位置
-        Transform smlTransform = QSitaML.transform;
-        Vector3 possml = smlTransform.localPosition;
-        possml.y = 56.7f;
-        smlTransform.localPosition = possml;
-        //しなり
-        //角度
-        Vector3 localAnglesmL = smlTransform.localEulerAngles;
-        localAnglesmL.z = 0f;
-        smlTransform.localEulerAngles = localAnglesmL;
-
         //右目
         Transform erTransform = QEyeR.transform;
         //大きさ
@@ -1773,17 +1192,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Transform nlTransform = QNamidaL.transform;
         //大きさ
         nlTransform.localScale = startSize;
-
-        kutisitaMeshRenderer.SetBlendShapeWeight(0, 0);
-        kutiueMeshRenderer.SetBlendShapeWeight(0, 0);
-        leftmayuMeshRenderer.SetBlendShapeWeight(0, 0);
-        leftnamidaMeshRenderer.SetBlendShapeWeight(0, 0);
-        lefteyesitaMeshRenderer.SetBlendShapeWeight(0, 0);
-        lefteyeueMeshRenderer.SetBlendShapeWeight(0, 0);
-        rightmayuMeshRenderer.SetBlendShapeWeight(0, 0);
-        rightnamidaMeshRenderer.SetBlendShapeWeight(0, 0);
-        righteyesitaMeshRenderer.SetBlendShapeWeight(0, 0);
-        righteyeueMeshRenderer.SetBlendShapeWeight(0, 0);
     }
     /*
     void EmotionMinusA()
